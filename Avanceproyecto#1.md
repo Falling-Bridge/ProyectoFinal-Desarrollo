@@ -20,3 +20,7 @@ el cual contaría con distintos paneles q se van superponiendo para avanzar dent
 ![Captura de pantalla 2024-06-10 234032](https://github.com/Falling-Bridge/ProyectoFinal-Desarrollo/assets/133477645/1ad99400-dc8d-4896-bb4f-2d1f2dca10e3)
 ![Captura de pantalla 2024-06-10 234044](https://github.com/Falling-Bridge/ProyectoFinal-Desarrollo/assets/133477645/627615d7-9d80-4186-920b-929dfed5dadb)
 ![Captura de pantalla 2024-06-10 234055](https://github.com/Falling-Bridge/ProyectoFinal-Desarrollo/assets/133477645/85ffa67f-6e23-4c19-9829-db49771e48a8)
+
+El modelo del UML sería algo como esto
+
+![image](https://github.com/Falling-Bridge/ProyectoFinal-Desarrollo/assets/133477645/a19383f4-abb4-4c86-84d7-f2c189649aff)
