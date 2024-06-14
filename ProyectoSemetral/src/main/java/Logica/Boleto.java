@@ -1,8 +1,10 @@
 package Logica;
 
+import Logica.Asientos.ModeloAsiento;
+
 public class Boleto {
     private Bus bus;
-    private Asiento asiento;
+    private ModeloAsiento asiento;
     public Boleto(Bus buslaitllier){
         bus = buslaitllier;
     }
