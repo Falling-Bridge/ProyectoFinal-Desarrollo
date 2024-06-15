@@ -8,7 +8,7 @@ import Logica.TipoBus;
 public abstract class ModeloAsiento {
     protected int Numero;
     protected TipoAsiento asientotipo;
-    protected int precio;
+    protected int precio = 0;
     protected String marca;
     protected boolean comprado;
     

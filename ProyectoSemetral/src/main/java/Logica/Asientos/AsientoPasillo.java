@@ -3,7 +3,11 @@ package Logica.Asientos;
 public class AsientoPasillo extends AsientoDecorador {
     public AsientoPasillo(ModeloAsiento silla){
         super(silla);
-        asiento = silla;
+        this.SumarPrecio();
     }    
-    asiento.SumarPrecio(500);
+    
+    @Override
+    public void SumarPrecio() {
+        asiento.precio += 500;
+    }
 }

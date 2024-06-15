@@ -9,7 +9,5 @@ public abstract class AsientoDecorador extends ModeloAsiento{
     public int getPrecio(){
         return asiento.getPrecio();
     }
-    public void SumarPrecio(int x){
-        asiento.precio += x;
-    }
+    public void SumarPrecio(){;}
 }

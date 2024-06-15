@@ -1,13 +1,16 @@
-package Logica;
+package Logica.Buses;
+import Logica.TipoAsiento;
+import Logica.TipoBus;
 import Logica.Asientos.*;
 import java.util.ArrayList;
 
 import Logica.Asientos.ModeloAsiento;
-public class Bus {
-    private TipoBus modelo;
-    private ArrayList<ModeloAsiento> Asientos;
+public abstract class ModeloBus {
+    protected TipoBus modelo;
+    protected int precio = 0;
+    protected ArrayList<ModeloAsiento> Asientos;
 
-    public Bus(TipoBus bus){
+    public ModeloBus(TipoBus bus){
         modelo = bus;
         //llenamos el bus con diferente cantidades de asientos de pendiendo de el tipo de bus
         if(modelo == TipoBus.TIPO1){
@@ -49,4 +52,10 @@ public class Bus {
         }
         return Asientos.get(numeroasiento);
     }
+
+    public int getPrecio(){
+        return precio;
+    }
+
+    public abstract String getDescription();
 }

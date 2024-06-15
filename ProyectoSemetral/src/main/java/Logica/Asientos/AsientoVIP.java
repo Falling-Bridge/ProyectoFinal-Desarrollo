@@ -1,12 +1,14 @@
 package Logica.Asientos;
 
-import Logica.TipoAsiento;
-import Logica.TipoBus;
-
-public class AsientoVIP extends ModeloAsiento{
+public class AsientoVIP extends AsientoDecorador{
     
-    public AsientoVIP(int numero, TipoBus bus, TipoAsiento asiento){
-        super(numero, bus, asiento);
+    public AsientoVIP(ModeloAsiento silla){
+        super(silla);
+        this.SumarPrecio();
+    }
 
+    @Override
+    public void SumarPrecio() {
+        asiento.precio += 3000;
     }
 }
