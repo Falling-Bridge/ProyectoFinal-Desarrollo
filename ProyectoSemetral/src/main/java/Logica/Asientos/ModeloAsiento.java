@@ -9,7 +9,6 @@ public abstract class ModeloAsiento {
     protected int Numero;
     protected TipoAsiento asientotipo;
     protected int precio = 0;
-    protected String marca;
     protected boolean comprado;
     
     public ModeloAsiento(int numero, TipoBus bus, TipoAsiento asiento){
