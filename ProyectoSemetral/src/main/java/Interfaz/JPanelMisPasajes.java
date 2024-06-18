@@ -1,23 +1,35 @@
 package Interfaz;
 
-import java.awt.*;
 import javax.swing.*;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class JPanelMisPasajes extends JPanel {
+    private Cambiodeescena cambiodeescena;
+    private JPanelMenú panelMenu;
 
-    public JPanelMisPasajes() {
-        Color colorOriginal = new Color(48, 118, 184); // Color original
-        setBackground(colorOriginal); // Establece el color de fondo inicial del panel
-        // Layout manager para centrar componentes
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.weightx = 1.0; // Aumenta el peso en x para que ocupe todo el ancho
+    public JPanelMisPasajes(Cambiodeescena cambiodeescena, JPanelMenú panelMenu) {
+        this.cambiodeescena = cambiodeescena;
+        this.panelMenu = panelMenu;
+        this.setBackground(Color.RED);
 
-        JLabel etiqueta = new JLabel("Mis pasajes");
-        etiqueta.setFont(new Font("Arial", Font.BOLD, 20)); // Configura la fuente y tamaño
-        etiqueta.setForeground(Color.WHITE); // Color blanco para el texto
-        etiqueta.setHorizontalAlignment(JLabel.CENTER); // Alinea el texto al centro
-        add(etiqueta, gbc);
+        // Configurar el layout del panel
+        setLayout(null); // Usar layout absoluto para posicionar el botón
+
+        // Crear y configurar el botón
+        JButton botonVolver = new JButton("Volver");
+        botonVolver.setBounds(350, 50, 100, 50); // Ajustar la posición y el tamaño del botón
+        add(botonVolver); // Añadir el botón al panel
+
+        // Añadir un ActionListener al botón
+        botonVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para cambiar de escena
+                cambiodeescena.changeScene(JPanelMisPasajes.this, panelMenu);
+            }
+        });
     }
 }
