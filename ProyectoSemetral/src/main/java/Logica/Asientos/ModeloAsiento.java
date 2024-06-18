@@ -22,7 +22,7 @@ public abstract class ModeloAsiento {
     public int getPrecio() {
         return precio;
     }
-    public String getDescription(){
+    public String toString(){
         return "Asiento número: " + Numero;
     }
 }

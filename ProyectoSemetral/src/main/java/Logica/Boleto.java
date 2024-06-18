@@ -10,9 +10,9 @@ public class Boleto {
         bus = buslaitllier;
     }
 
-    public void realizarCompra(int x){
+    /*public void realizarCompra(int x){
         asiento = bus.ComprarAsiento(x);
-    }
+    }*/
 
     public void getInfoBoleto(){
         System.err.println("Bus: " + bus);

@@ -12,7 +12,7 @@ public class AsientoVentana extends AsientoDecorador {
     }
 
     @Override
-    public String getDescription(){
-        return asiento.getDescription() + ", Asiento ventana";
+    public String toString(){
+        return asiento.toString() + ", Asiento ventana";
     }
 }

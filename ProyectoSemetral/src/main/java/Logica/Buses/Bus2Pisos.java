@@ -22,13 +22,14 @@ public class Bus2Pisos extends BusDecorador {
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.get);
+                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
             }
             else if(i>25 && i < 40){
@@ -37,12 +38,14 @@ public class Bus2Pisos extends BusDecorador {
                     silla = new AsientoCama(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoCama(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
             }
             else{
@@ -51,28 +54,32 @@ public class Bus2Pisos extends BusDecorador {
                     silla = new AsientoVIP(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoVIP(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
             }
         }
         for(int i = 1; i <= 20; i++){
-            if(i<30){
+            if(i<10){
                 if(i % 4 == 1 || i % 4 == 0){
-                    ModeloAsiento silla = new Asiento(i);
-                    silla = new AsientoSemiCama(silla);
+                    ModeloAsiento silla = new Asiento(i+50);
+                    silla = new AsientoCama(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
                 else{
-                    ModeloAsiento silla = new Asiento(i);
-                    silla = new AsientoSemiCama(silla);
+                    ModeloAsiento silla = new Asiento(i+50);
+                    silla = new AsientoCama(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
+                    System.out.println(silla.toString());
                 }
             }
             else{
@@ -81,12 +88,14 @@ public class Bus2Pisos extends BusDecorador {
                     silla = new AsientoVIP(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso2.add(silla);
+                    System.out.println(silla.toString());
                 }
                 else{
-                    ModeloAsiento silla = new Asiento(i+50);
+                    ModeloAsiento silla = new Asiento((i+50));
                     silla = new AsientoVIP(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso2.add(silla);
+                    System.out.println(silla.toString());
                 }
             }
         }
@@ -98,7 +107,7 @@ public class Bus2Pisos extends BusDecorador {
     }
 
     @Override
-    public String getDescription(){
-        return "Pisos: 2" + buslaillier.getDescription();
+    public String toString(){
+        return "Pisos: 2" + buslaillier.toString();
     }
 }

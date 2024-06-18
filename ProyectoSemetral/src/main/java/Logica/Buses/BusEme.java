@@ -12,7 +12,7 @@ public class BusEme extends BusDecorador {
     }
 
     @Override
-    public String getDescription(){
-        return "Marca: EME" + buslaillier.getDescription();
+    public String toString(){
+        return "Marca: EME" + buslaillier.toString();
     }
 }

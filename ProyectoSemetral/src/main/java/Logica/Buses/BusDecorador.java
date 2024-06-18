@@ -13,7 +13,7 @@ public abstract class BusDecorador extends ModeloBus {
     }
 
     @Override
-    public String getDescription(){
-        return buslaillier.getDescription();
+    public String toString(){
+        return buslaillier.toString();
     }
 }

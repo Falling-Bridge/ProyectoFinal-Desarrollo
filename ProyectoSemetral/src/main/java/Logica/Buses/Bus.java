@@ -3,6 +3,7 @@ package Logica.Buses;
 
 public class Bus extends ModeloBus {
     public Bus(){
+        super();
     }
     
     @Override
@@ -11,7 +12,7 @@ public class Bus extends ModeloBus {
     }
 
     @Override
-    public String getDescription(){
-        return "Precio: " + getPrecio();
+    public String toString(){
+        return " Precio: " + getPrecio();
     }
 }

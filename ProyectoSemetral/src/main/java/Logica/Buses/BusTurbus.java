@@ -12,7 +12,7 @@ public class BusTurbus extends BusDecorador {
     }
 
     @Override
-    public String getDescription(){
-        return "Marca: TurBus" + buslaillier.getDescription();
+    public String toString(){
+        return "Marca: TurBus" + buslaillier.toString();
     }
 }

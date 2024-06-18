@@ -12,7 +12,7 @@ public class AsientoSemiCama extends AsientoDecorador{
     }
 
     @Override
-    public String getDescription(){
-        return asiento.getDescription() + ", Asiento SemiCama";
+    public String toString(){
+        return asiento.toString() + ", Asiento SemiCama";
     }
 }

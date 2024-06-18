@@ -9,7 +9,8 @@ public abstract class AsientoDecorador extends ModeloAsiento{
     public int getPrecio(){
         return asiento.getPrecio();
     }
-    public String getDescription(){
-        return asiento.getDescription();
+
+    public String toString(){
+        return asiento.toString();
     }
 }

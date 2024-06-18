@@ -12,7 +12,7 @@ public class AsientoPasillo extends AsientoDecorador {
     }
 
     @Override
-    public String getDescription(){
-        return asiento.getDescription() + ", Asiento pasillo";
+    public String toString(){
+        return asiento.toString() + ", Asiento pasillo";
     }
 }
