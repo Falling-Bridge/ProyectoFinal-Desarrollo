@@ -10,4 +10,9 @@ public class AsientoVentana extends AsientoDecorador {
     public int getPrecio() {
         return asiento.getPrecio() + 500;
     }
+
+    @Override
+    public String getDescription(){
+        return asiento.getDescription() + ", Asiento ventana";
+    }
 }

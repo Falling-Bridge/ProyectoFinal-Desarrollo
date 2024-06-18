@@ -11,41 +11,8 @@ public abstract class ModeloBus {
     protected ArrayList<ModeloAsiento> AsientosPiso1;
     protected ArrayList<ModeloAsiento> AsientosPiso2;
 
-    public ModeloBus(TipoBus bus){
-        modelo = bus;
-        //llenamos el bus con diferente cantidades de asientos de pendiendo de el tipo de bus
-        if(modelo == TipoBus.TIPO1){
-            for(int i = 0; i < 100; i++){
-                if(i<20){
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.VIP);
-                    Asientos.add(silla);
-                }
-                else if(i>20 && i < 50){
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.SEMICAMA);
-                    Asientos.add(silla);
-                }
-                else{
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.CAMA);
-                    Asientos.add(silla);
-                }
-            }
-        }
-        else{
-            for(int i = 0; i < 120; i++){
-                if(i<25){
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.VIP);
-                    Asientos.add(silla);
-                }
-                else if(i>25 && i < 80){
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.SEMICAMA);
-                    Asientos.add(silla);
-                }
-                else{
-                    ModeloAsiento silla = new Asiento(i, bus, TipoAsiento.CAMA);
-                    Asientos.add(silla);
-                }
-            }
-        }
+    public ModeloBus(){
+        
     }
 
     public ModeloAsiento ComprarAsiento(int numeroasiento){

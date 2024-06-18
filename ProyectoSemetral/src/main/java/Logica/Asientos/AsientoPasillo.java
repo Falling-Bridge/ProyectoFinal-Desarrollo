@@ -1,6 +1,7 @@
 package Logica.Asientos;
 
 public class AsientoPasillo extends AsientoDecorador {
+    
     public AsientoPasillo(ModeloAsiento silla){
         super(silla);
     }    
@@ -8,5 +9,10 @@ public class AsientoPasillo extends AsientoDecorador {
     @Override
     public int getPrecio() {
         return asiento.precio + 500;
+    }
+
+    @Override
+    public String getDescription(){
+        return asiento.getDescription() + ", Asiento pasillo";
     }
 }

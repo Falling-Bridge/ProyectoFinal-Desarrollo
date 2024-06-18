@@ -3,7 +3,7 @@ package Logica.Buses;
 public abstract class BusDecorador extends ModeloBus {
     protected ModeloBus buslaillier;
     public BusDecorador(ModeloBus busforma){
-        super(busforma.modelo);
+        super();
         this.buslaillier = busforma;
     }
 
