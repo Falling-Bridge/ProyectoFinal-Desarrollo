@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class CrearLabels {
 
+    //Es simplemente un creador de JLabes para no tener que usar 3, 4 líneas de código
+
     public CrearLabels(){}      
 
     public JLabel botonlabel(String Nombre, int x, int y, int width, int height) {

@@ -2,7 +2,7 @@ package Interfaz;
 
 import javax.swing.*;
 
-public class Cambiodeescena {
+public class Cambiodeescena { //Es el código que me permite pasar de un panel a otro
     private JFrame frame;
 
     public Cambiodeescena(JFrame frame) {

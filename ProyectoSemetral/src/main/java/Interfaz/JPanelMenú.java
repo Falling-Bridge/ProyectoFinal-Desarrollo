@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JPanelMenú extends JPanel {
+
+    //instancias de otras clases
     private Cambiodeescena cambiodeescena;
     private JPanelMisPasajes misPasajes;
     private JPanelComprar comprar;
@@ -11,19 +13,18 @@ public class JPanelMenú extends JPanel {
     private CrearBoton crear;
 
     public JPanelMenú(Cambiodeescena cambiodeescena) {
+
+        // inicialización de otras clases
         this.cambiodeescena = cambiodeescena;
         misPasajes = new JPanelMisPasajes(cambiodeescena, this); // Pasa this para volver al menú
         comprar = new JPanelComprar(cambiodeescena, this);
         crear = new CrearBoton(cambiodeescena);
-
         this.setBackground(Color.BLACK);
-        // Configurar el layout del panel
-        setLayout(null); // Usar layout absoluto para posicionar el botón
+        setLayout(null);
 
-        // Crear y configurar el botón
-
-        add(crear.botoncrear("Comprar", 50, 150, 150, 50, JPanelMenú.this, comprar));
-        add(crear.botoncrear("Mis pasajes", 50, 50, 150, 50, JPanelMenú.this, misPasajes));
+        //adición de botones
+        add(crear.botonsimplecrear("Comprar", 250, 200, 150, 50, JPanelMenú.this, comprar));
+        add(crear.botonsimplecrear("Mis pasajes", 500, 200, 150, 50, JPanelMenú.this, misPasajes));
 
     }
 }

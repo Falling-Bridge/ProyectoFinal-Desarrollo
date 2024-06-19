@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JPanelComprar extends JPanel {
+
+    //instancias de otras clases
     private Cambiodeescena cambiodeescena;
     private JPanelDestino paneldestino;
     private JPanelMenú panelMenu;
@@ -11,20 +13,21 @@ public class JPanelComprar extends JPanel {
     private CrearLabels labels;
 
     public JPanelComprar(Cambiodeescena cambiodeescena, JPanelMenú panelMenu) {
+
+        //inicialización de las instancias
         this.cambiodeescena = cambiodeescena;
         this.panelMenu = panelMenu;
         this.crear = new CrearBoton(cambiodeescena);
         this.labels = new CrearLabels();
         this.paneldestino = new JPanelDestino(cambiodeescena, this);
         this.setBackground(Color.GREEN);
+        setLayout(null);
 
-        // Configurar el layout del panel
-        setLayout(null); // Usar layout absoluto para posicionar el botón
-
+        //adición de botones
         add(labels.botonlabel("Seleccionar compañía", 250, 50, 300, 50));
-        add(crear.botoncrear("Comprañia A", 100, 360, 150, 50, this, paneldestino));
-        add(crear.botoncrear("Comprañia B", 300, 360, 150, 50, this, paneldestino));
-        add(crear.botoncrear("Comprañia C", 500, 360, 150, 50, this, paneldestino));
-        add(crear.botoncrear("Volver", 300, 500, 150, 50, this, panelMenu));
+        add(crear.botonsimplecrear("Comprañia A", 100, 360, 150, 50, this, paneldestino));
+        add(crear.botonsimplecrear("Comprañia B", 300, 360, 150, 50, this, paneldestino));
+        add(crear.botonsimplecrear("Comprañia C", 500, 360, 150, 50, this, paneldestino));
+        add(crear.botonsimplecrear("Volver", 300, 500, 150, 50, this, panelMenu));
     }
 }

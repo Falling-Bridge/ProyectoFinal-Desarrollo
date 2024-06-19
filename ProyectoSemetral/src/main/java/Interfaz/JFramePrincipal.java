@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class JFramePrincipal extends JFrame {
 
+    //aquí se configura el formato que siguen todos los demás paneles, por eso el nombre de jframe
+
     public JFramePrincipal() {
         // Configurar el JFrame
         setTitle("Programa");
@@ -14,8 +16,8 @@ public class JFramePrincipal extends JFrame {
         // Crear una instancia de Cambiodeescena
         Cambiodeescena cambio = new Cambiodeescena(this);
 
-        // Crear el panel inicial
+        // Al correr el código lo primero que aparece es el menú principal
         JPanelMenú panelMenu = new JPanelMenú(cambio);
-        cambio.changeScene(null, panelMenu); // Mostrar el panel inicial
+        cambio.changeScene(null, panelMenu);
     }
 }
