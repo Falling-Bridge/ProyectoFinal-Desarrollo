@@ -19,4 +19,3 @@ public class JFramePrincipal extends JFrame {
         cambio.changeScene(null, panelMenu); // Mostrar el panel inicial
     }
 }
-
