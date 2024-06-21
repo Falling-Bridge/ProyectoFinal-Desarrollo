@@ -20,11 +20,11 @@ public class JPanelComprar extends JPanel {
         this.crear = new CrearBoton(cambiodeescena);
         this.labels = new CrearLabels();
         this.paneldestino = new JPanelDestino(cambiodeescena, this);
-        this.setBackground(Color.GREEN);
         setLayout(null);
+        this.setBackground(Color.GREEN);
 
         //adición de botones
-        add(labels.botonlabel("Seleccionar compañía", 250, 50, 300, 50));
+        add(labels.botonlabel("Seleccionar compañía", 250, 50, 300, 50, 25));
         add(crear.botonsimplecrear("Comprañia A", 100, 360, 150, 50, this, paneldestino));
         add(crear.botonsimplecrear("Comprañia B", 300, 360, 150, 50, this, paneldestino));
         add(crear.botonsimplecrear("Comprañia C", 500, 360, 150, 50, this, paneldestino));

@@ -9,10 +9,11 @@ public class CrearLabels {
 
     public CrearLabels(){}      
 
-    public JLabel botonlabel(String Nombre, int x, int y, int width, int height) {
+    public JLabel botonlabel(String Nombre, int x, int y, int width, int height, int tamañofont) {
         JLabel label = new JLabel(Nombre);
         label.setBounds(x, y, width, height); // Ajustar la posición y el tamaño del botón
-        label.setFont(new Font("Arial", Font.BOLD, 25));
+        label.setFont(new Font("Arial", Font.BOLD, tamañofont));
+        label.setHorizontalAlignment(SwingConstants.LEFT);
         return label;
     }
 }

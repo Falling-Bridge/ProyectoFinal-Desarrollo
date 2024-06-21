@@ -23,8 +23,8 @@ public class JPanelMenú extends JPanel {
         setLayout(null);
 
         //adición de botones
-        add(crear.botonsimplecrear("Comprar", 250, 200, 150, 50, JPanelMenú.this, comprar));
-        add(crear.botonsimplecrear("Mis pasajes", 500, 200, 150, 50, JPanelMenú.this, misPasajes));
+        add(crear.botonsimplecrear("Comprar", 250, 200, 150, 50, this, comprar));
+        add(crear.botonsimplecrear("Mis pasajes", 500, 200, 150, 50, this, misPasajes));
 
     }
 }

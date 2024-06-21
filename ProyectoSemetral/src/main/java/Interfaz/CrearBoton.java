@@ -27,11 +27,19 @@ public class CrearBoton { // es el creador de botones por defecto, hay excepcion
         return boton;
     }
 
-    // Método para crear botones complejos que recuerdan eventos como 'destino', 'tipo de viaje', 'hora de salida', etc
+    // Método para crear JRadioButton
+    public JRadioButton crearRadioButton(String text, boolean selected, int x, int y, ActionListener actionListener) {
+        JRadioButton radioButton = new JRadioButton(text, selected);
+        radioButton.setBounds(x, y, 100, 30);
+        radioButton.addActionListener(actionListener);
+        return radioButton;
+    }
+
+    // Método para crear botones complejos que recuerdan eventos
     public JButton botoncomplejocrear(String nombre, int x, int y, int width, int height) {
         JButton boton = new JButton(nombre);
         boton.setBounds(x, y, width, height);
-        boton.setFont(new Font("Arial", Font.BOLD, 18));
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
         return boton;
     }
 }
