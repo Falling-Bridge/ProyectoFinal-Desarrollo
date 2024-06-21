@@ -1,3 +1,4 @@
+import Logica.Boleto;
 import Logica.Buses.*;
 public class Main {
     public static void main(String[] args) {
@@ -5,6 +6,8 @@ public class Main {
         ModeloBus Bus = new Bus();
         Bus = new BusLasGalaxias(Bus);
         Bus = new Bus1Piso(Bus);
-        System.out.println(Bus.toString());
+        Boleto boleto = new Boleto();
+        boleto.realizarCompra(Bus, 21);
+        boleto.getInfoBoleto();
     }
 }

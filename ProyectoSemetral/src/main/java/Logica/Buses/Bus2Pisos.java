@@ -1,15 +1,23 @@
 package Logica.Buses;
 
 import Logica.Asientos.*;
-
+/**
+ * es el segundo decorador segun el tipo de bus, donde se define el bus como uno de dos pisos,
+ * y se llenan los Arraylists con asientos variados
+ */
 public class Bus2Pisos extends BusDecorador {
     
     public Bus2Pisos(ModeloBus busforma){
         super(busforma);
-        buslaillier.setPrecio(1300);
 
-        for(int i = 1; i <= 50; i++){
-            if(i<25){
+        /**
+         * el bus tiene 50 asientos y se llena con distinto tipos
+         * va verificando segun su pocición si va a ser ventana o pasillo,
+         * primero llenando el primer piso, y luego el segundo
+         * añadiendo los decoradores a los asientos en ambos casos
+         */
+        for(int i = 1; i <= 30; i++){
+            if(i <= 16){
                 if(i % 4 == 1 || i % 4 == 0){
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoSemiCama(silla);
@@ -23,7 +31,7 @@ public class Bus2Pisos extends BusDecorador {
                     AsientosPiso1.add(silla);
                 }
             }
-            else if(i>25 && i < 40){
+            else if(i > 16 && i < 24){
                 if(i % 4 == 1 || i % 4 == 0){
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoCama(silla);
@@ -84,6 +92,19 @@ public class Bus2Pisos extends BusDecorador {
         }
     }
 
+    /**
+     * hace override del metodo getPrecio, esta vez modificandolo
+     * @return el precio ya establecido mas 1300 pesos
+     */
+    @Override
+    public int getPrecio(){
+        return buslaillier.getPrecio() + 1300;
+    }
+
+    /**
+     * hace override y cambia la definición del bus
+     * @return le añade a la descripción que el bus tiene dos pisos con asientos
+     */
     @Override
     public String toString(){
         return "Pisos: 2; " + buslaillier.toString();
