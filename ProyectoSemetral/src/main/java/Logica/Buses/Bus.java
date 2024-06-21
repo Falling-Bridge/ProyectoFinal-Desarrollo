@@ -1,6 +1,5 @@
 package Logica.Buses;
 
-
 public class Bus extends ModeloBus {
     public Bus(){
         super();

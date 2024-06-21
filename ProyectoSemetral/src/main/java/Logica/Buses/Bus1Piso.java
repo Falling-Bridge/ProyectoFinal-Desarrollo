@@ -6,6 +6,7 @@ public class Bus1Piso extends BusDecorador{
     
     public Bus1Piso(ModeloBus busforma){
         super(busforma);
+        busforma.setPrecio(1000);
 
         for(int i = 1; i <= 50; i++){
             if(i<30){
@@ -14,14 +15,12 @@ public class Bus1Piso extends BusDecorador{
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
             }
             else if(i>30 && i < 45){
@@ -30,14 +29,12 @@ public class Bus1Piso extends BusDecorador{
                     silla = new AsientoCama(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoCama(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
             }
             else{
@@ -46,26 +43,19 @@ public class Bus1Piso extends BusDecorador{
                     silla = new AsientoVIP(silla);
                     silla = new AsientoVentana(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoVIP(silla);
                     silla = new AsientoPasillo(silla);
                     AsientosPiso1.add(silla);
-                    System.out.println(silla.toString());
                 }
             }
         }
     }
 
     @Override
-    public int getPrecio(){
-        return buslaillier.getPrecio() + 1000;
-    }
-
-    @Override
     public String toString(){
-        return "Pisos: 1" + buslaillier.toString();
+        return "Pisos: 1; " + buslaillier.toString();
     }
 }

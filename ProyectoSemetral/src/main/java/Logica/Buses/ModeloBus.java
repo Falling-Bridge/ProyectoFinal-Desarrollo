@@ -1,7 +1,5 @@
 package Logica.Buses;
-import Logica.TipoAsiento;
 import Logica.TipoBus;
-import Logica.Asientos.*;
 import java.util.ArrayList;
 
 import Logica.Asientos.ModeloAsiento;
@@ -25,6 +23,12 @@ public abstract class ModeloBus {
 
     public int getPrecio(){
         return precio;
+    }
+
+    public void setPrecio(int x){
+        System.out.println("x" +x);
+        System.out.println("precio "+(precio));
+        precio += x;
     }
 
     public abstract String toString();
