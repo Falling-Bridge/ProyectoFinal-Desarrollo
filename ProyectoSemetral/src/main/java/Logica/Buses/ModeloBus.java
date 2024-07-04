@@ -2,6 +2,7 @@ package Logica.Buses;
 
 import java.util.ArrayList;
 import Logica.Asientos.ModeloAsiento;
+import java.util.Random;
 
 public abstract class ModeloBus {
     /**
@@ -18,6 +19,17 @@ public abstract class ModeloBus {
          */
         AsientosPiso1 = new ArrayList<ModeloAsiento>();
         AsientosPiso2 = new ArrayList<ModeloAsiento>();
+    }
+    public boolean llenado_de_asientos(int randomizador){
+        Random random = new Random();
+        if(randomizador == 0){
+            randomizador = random.nextInt(5);
+            return true;
+        }
+        else{
+            randomizador --;
+            return false;
+        }
     }
 
     /**

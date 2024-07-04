@@ -19,7 +19,12 @@ public abstract class ModeloAsiento {
      * metodo para señalar q el asiento está comprado
      */
     public void comprar(){
-        comprado = true;
+        if(comprado == false) {
+            comprado = true;
+        }
+        else{
+            System.out.println("el asiento ya está comprado");
+        }
     }
 
     /**

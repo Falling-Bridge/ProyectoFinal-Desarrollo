@@ -1,6 +1,9 @@
 package Logica.Buses;
 
 import Logica.Asientos.*;
+
+import java.util.Random;
+
 /**
  * es el segundo decorador segun el tipo de bus, donde se define el bus como uno de dos pisos,
  * y se llenan los Arraylists con asientos variados
@@ -16,18 +19,26 @@ public class Bus2Pisos extends BusDecorador {
          * primero llenando el primer piso, y luego el segundo
          * añadiendo los decoradores a los asientos en ambos casos
          */
+        Random random = new Random();
+        int numrandom = random.nextInt(7);
         for(int i = 1; i <= 30; i++){
             if(i <= 16){
                 if(i % 4 == 1 || i % 4 == 0){
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoSemiCama(silla);
                     silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
             }
@@ -36,12 +47,18 @@ public class Bus2Pisos extends BusDecorador {
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoCama(silla);
                     silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoCama(silla);
                     silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
             }
@@ -50,12 +67,18 @@ public class Bus2Pisos extends BusDecorador {
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoVIP(silla);
                     silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i);
                     silla = new AsientoVIP(silla);
                     silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
             }
@@ -66,12 +89,18 @@ public class Bus2Pisos extends BusDecorador {
                     ModeloAsiento silla = new Asiento(i+50);
                     silla = new AsientoCama(silla);
                     silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
                 else{
                     ModeloAsiento silla = new Asiento(i+50);
                     silla = new AsientoCama(silla);
                     silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso1.add(silla);
                 }
             }
@@ -80,12 +109,18 @@ public class Bus2Pisos extends BusDecorador {
                     ModeloAsiento silla = new Asiento(i+50);
                     silla = new AsientoVIP(silla);
                     silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso2.add(silla);
                 }
                 else{
                     ModeloAsiento silla = new Asiento((i+50));
                     silla = new AsientoVIP(silla);
                     silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos(numrandom)){
+                        silla.comprar();
+                    }
                     AsientosPiso2.add(silla);
                 }
             }

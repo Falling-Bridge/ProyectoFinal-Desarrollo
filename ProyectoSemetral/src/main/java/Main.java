@@ -7,7 +7,8 @@ public class Main {
         Bus = new BusLasGalaxias(Bus);
         Bus = new Bus1Piso(Bus);
         Boleto boleto = new Boleto();
-        boleto.realizarCompra(Bus, 21);
+
+        boleto.realizarCompra(Bus, 11);
         boleto.getInfoBoleto();
     }
 }

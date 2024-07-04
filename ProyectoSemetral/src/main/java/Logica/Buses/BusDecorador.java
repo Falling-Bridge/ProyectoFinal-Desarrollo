@@ -28,4 +28,5 @@ public abstract class BusDecorador extends ModeloBus {
     public String toString(){
         return buslaillier.toString();
     }
+
 }
