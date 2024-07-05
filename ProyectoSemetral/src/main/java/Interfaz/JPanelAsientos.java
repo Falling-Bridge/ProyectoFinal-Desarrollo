@@ -3,23 +3,29 @@ package Interfaz;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.nio.file.*;
 
 public class JPanelAsientos extends JPanel {
 
     private JPanelDestino paneldestino;
     private Cambiodeescena cambiodeescena;
+    private JPanelPagar panelPagar;
     private CrearBoton crear;
     private CrearLabels crearLabels;
+    private ManejoArchivo manejoArchivo;
     private JButton[] asientosPiso1;
     private JButton[] asientosPiso2;
     private boolean piso1 = true; // Por defecto, la opción 1 está seleccionada
     private boolean[] asientosSeleccionados; // Array para almacenar los asientos seleccionados
     private JTextArea areaResumen; // JTextArea para mostrar el resumen de selección
-    
+    private JScrollPane scrollResumen;
+    private JButton botonIrAPagar;
 
-    public JPanelAsientos(Cambiodeescena cambiodeescena, JPanelDestino paneldestino) {
+    public JPanelAsientos(Cambiodeescena cambiodeescena, JPanelDestino paneldestino, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
         this.cambiodeescena = cambiodeescena;
         this.paneldestino = paneldestino;
+        panelPagar = new JPanelPagar(cambiodeescena, this, panelMenú, misPasajes);
         crear = new CrearBoton(cambiodeescena);
         setLayout(null); // Layout absoluto para posicionar componentes manualmente
         this.setBackground(Color.GRAY);
@@ -27,22 +33,31 @@ public class JPanelAsientos extends JPanel {
 
         // Inicializar JTextArea para el resumen de selección
         areaResumen = new JTextArea();
-        areaResumen.setBounds(600, 100, 400, 100); // Ajusta las coordenadas y el tamaño según sea necesario
-        areaResumen.setEditable(false); // Para evitar que se pueda editar manualmente
-        add(areaResumen); // Agrega el JTextArea al panel
+        areaResumen.setEditable(false);
+        scrollResumen = new JScrollPane(areaResumen);
+        scrollResumen.setBounds(560, 100, 250, 200);
+        scrollResumen.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        add(scrollResumen);
+        
+        asientosSeleccionados = new boolean[40];
 
-        // Inicializar array de asientos seleccionados
-        asientosSeleccionados = new boolean[40]; // Total de asientos en ambos pisos
-
-        // Crear los botones de opción usando CrearBoton
         crearBotonPiso("Piso 1", true, 50);
         crearBotonPiso("Piso 2", false, 200);
-
-        // Botón para volver
         add(crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino));
+        botonIrAPagar = crear.botonsimplecrear("Ir a pagar", 500, 450, 150, 50, this, panelPagar);
+        botonIrAPagar.setEnabled(false);
+        botonIrAPagar.addActionListener(this::guardarSeleccion);
+        add(botonIrAPagar);
 
-        // Inicialmente, mostrar los componentes correspondientes a la opción 1
         actualizarPanel();
+        
+        // Agregar ActionListener al botón 'Volver'
+        JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
+        volverButton.addActionListener(e -> {
+            manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
+            cambiodeescena.changeScene(this, paneldestino);
+        });
+        add(volverButton);
     }
 
     private void crearBotonPiso(String texto, boolean selected, int x) {
@@ -59,21 +74,18 @@ public class JPanelAsientos extends JPanel {
     private void actualizarPanel() {
         removeAll();
 
-        // Volver a crear los botones de opción
         crearBotonPiso("Piso 1", piso1, 50);
         crearBotonPiso("Piso 2", !piso1, 200);
-
-        // Botón para volver
-        add(crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino));
-
-        // Crear los asientos según el piso seleccionado
+        JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
+        volverButton.addActionListener(e -> {
+            manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
+            cambiodeescena.changeScene(this, paneldestino);
+        });
+        add(volverButton);
+        add(botonIrAPagar);
         crearAsientos(piso1 ? asientosPiso1 : asientosPiso2, piso1 ? 0 : 20, piso1 ? 20 : 40);
-
-        // Actualizar el resumen de selección
         ResumenSelección();
-
-        add(areaResumen); // Agrega el JTextArea al panel
-
+        add(scrollResumen);
         revalidate();
         repaint();
     }
@@ -106,6 +118,7 @@ public class JPanelAsientos extends JPanel {
                                                                                                         // el estado seleccionado
                     // Actualizar el resumen de selección
                     ResumenSelección();
+                    actualizarEstadoBotonPagar();
                 }
             });
 
@@ -151,13 +164,15 @@ public class JPanelAsientos extends JPanel {
         }
     }
 
-    private void ResumenSelección() {
+    private String ResumenSelección() {
         int totalAsientos = asientosSeleccionados.length;
         int saloncama = 0, semicama = 0, normal = 0;
+        StringBuilder asientosDetalle = new StringBuilder();
 
         for (int i = 0; i < totalAsientos; i++) {
             if (asientosSeleccionados[i]) {
                 String tipoAsiento = determinarTipoAsiento(i);
+                asientosDetalle.append("Asiento ").append(i + 1).append(": ").append(tipoAsiento).append("\n");
                 switch (tipoAsiento) {
                     case "Saloncama":
                         saloncama++;
@@ -172,18 +187,30 @@ public class JPanelAsientos extends JPanel {
             }
         }
 
-        // Actualizar el JTextArea con el resumen de selección
         StringBuilder sb = new StringBuilder();
         sb.append("Resumen de Selección:\n");
+        sb.append(asientosDetalle.toString());
         sb.append("Total de Asientos Ocupados: ").append(contarAsientosSeleccionados()).append("\n");
-        sb.append("Saloncama: ").append(saloncama).append("\n");
-        sb.append("Semicama: ").append(semicama).append("\n");
-        sb.append("Normal: ").append(normal).append("\n");
-        sb.append("Precio: ").append(saloncama *100 + semicama *200 + normal*300).append("\n");
+        if (saloncama != 0){
+            sb.append("Saloncama: ").append(saloncama).append("\n");
+        } if (semicama != 0){
+            sb.append("Semicama: ").append(semicama).append("\n");
+        } if (normal != 0){
+            sb.append("Normal: ").append(normal).append("\n");
+        }
+        sb.append("Precio: ").append(saloncama * 100 + semicama * 200 + normal * 300);
 
         areaResumen.setText(sb.toString());
+
+        return sb.toString(); // Devuelve el resumen como String
     }
 
+    private void guardarSeleccion(ActionEvent e) {
+        if (botonIrAPagar.isEnabled()) {
+            crear.guardarseleccion(ResumenSelección());
+        }
+    }
+    
     private void deseleccionarTodosAsientos() {
         for (int i = 0; i < asientosSeleccionados.length; i++) {
             asientosSeleccionados[i] = false;
@@ -196,5 +223,9 @@ public class JPanelAsientos extends JPanel {
         }
         // Actualizar el resumen de selección
         ResumenSelección();
+    }
+
+    private void actualizarEstadoBotonPagar() {
+        botonIrAPagar.setEnabled(contarAsientosSeleccionados() > 0);
     }
 }

@@ -18,6 +18,8 @@ public class JFramePrincipal extends JFrame {
 
         // Al correr el código lo primero que aparece es el menú principal
         JPanelMenú panelMenu = new JPanelMenú(cambio);
+
+        // Inicialmente mostrar el panelMenú
         cambio.changeScene(null, panelMenu);
     }
 }
