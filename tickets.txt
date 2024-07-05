@@ -1,0 +1,15 @@
+Compañia A
+Destino 1
+Ida y vuelta
+07:00 AM
+05/07/2024
+Resumen de Selección:
+Asiento 17: Semicama
+Asiento 18: Normal
+Asiento 19: Saloncama
+Total de Asientos Ocupados: 3
+Saloncama: 1
+Semicama: 1
+Normal: 1
+Precio: 600
+null
