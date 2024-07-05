@@ -1,6 +1,6 @@
 import Logica.Boleto;
 import Logica.Buses.*;
-import Logica.Exepciones.ComprarDenuevoExecption;
+import Logica.Excepciones.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
@@ -10,7 +10,7 @@ public class Main {
         try {
             Bus = new Bus1Piso(Bus);
         }
-        catch (ComprarDenuevoExecption e){
+        catch (ComparDenuevoException e){
             System.out.println(e.getMessage());
         }
         Boleto boleto = new Boleto();
