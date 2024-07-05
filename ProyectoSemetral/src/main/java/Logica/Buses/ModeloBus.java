@@ -20,16 +20,18 @@ public abstract class ModeloBus {
         AsientosPiso1 = new ArrayList<ModeloAsiento>();
         AsientosPiso2 = new ArrayList<ModeloAsiento>();
     }
-    public boolean llenado_de_asientos(int randomizador){
+
+    /**
+     * es un metodo que se usa para q algunos asientos esten comprados al momento de comprar
+     * el cual toma un valor random con un randomizador, revisa si es igual a 0
+     * y si no es igual retorna false y no se compra en asiento al momento de decorar el bus
+     * @return true o false dependiendo si el número era 0 o no
+     */
+    public boolean llenado_de_asientos(){
         Random random = new Random();
-        if(randomizador == 0){
-            randomizador = random.nextInt(5);
-            return true;
-        }
-        else{
-            randomizador --;
-            return false;
-        }
+        int randomizador = random.nextInt(2);
+        System.out.println(randomizador);
+        return (randomizador == 0);
     }
 
     /**
@@ -37,7 +39,7 @@ public abstract class ModeloBus {
      * @param numeroasiento es el asiento q se quiere comprar
      * @return al asiento ya comprado
      */
-    public ModeloAsiento ComprarAsiento(int numeroasiento){
+    public ModeloAsiento ComprarAsiento(int numeroasiento) throws Exception{
         if(numeroasiento > AsientosPiso1.size()){
             AsientosPiso2.get(numeroasiento).comprar();/**se marca el boolean del asiento como true*/
             return  AsientosPiso2.get(numeroasiento);

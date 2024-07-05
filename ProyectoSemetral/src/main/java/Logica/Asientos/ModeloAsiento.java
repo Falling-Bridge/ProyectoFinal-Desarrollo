@@ -1,5 +1,6 @@
 package Logica.Asientos;
 
+import Logica.Exepciones.ComprarDenuevoExecption;
 
 /**
  * esta clase es la base de mi decorador, a fin de cuentas sería como la interfaz,
@@ -18,12 +19,12 @@ public abstract class ModeloAsiento {
     /**
      * metodo para señalar q el asiento está comprado
      */
-    public void comprar(){
+    public void comprar() throws Exception{
         if(comprado == false) {
             comprado = true;
         }
         else{
-            System.out.println("el asiento ya está comprado");
+            throw new ComprarDenuevoExecption();
         }
     }
 

@@ -19,7 +19,7 @@ public class Boleto {
      * @param bus el bus q despues se guarda para obtener los datos, y se llama al metodo para comprar
      * @param numero el numero del asiento
      */
-    public void realizarCompra(ModeloBus bus, int numero){
+    public void realizarCompra(ModeloBus bus, int numero) throws Exception{
         buslaitllier = bus;
         asiento = bus.ComprarAsiento(numero-1);/** se llama al numero -1, ya q los valores del arreglo parten desde 0 */
         precio = bus.getPrecio() + asiento.getPrecio(); /** se calcula el precio */
