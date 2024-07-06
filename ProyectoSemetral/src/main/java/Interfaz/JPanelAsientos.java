@@ -27,6 +27,7 @@ public class JPanelAsientos extends JPanel {
         this.paneldestino = paneldestino;
         panelPagar = new JPanelPagar(cambiodeescena, this, panelMenú, misPasajes);
         crear = new CrearBoton(cambiodeescena);
+        this.manejoArchivo = new ManejoArchivo();
         setLayout(null); // Layout absoluto para posicionar componentes manualmente
         this.setBackground(Color.GRAY);
         crearLabels = new CrearLabels();
@@ -55,7 +56,6 @@ public class JPanelAsientos extends JPanel {
         JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
         volverButton.addActionListener(e -> {
             manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
-            cambiodeescena.changeScene(this, paneldestino);
         });
         add(volverButton);
     }
@@ -79,7 +79,6 @@ public class JPanelAsientos extends JPanel {
         JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
         volverButton.addActionListener(e -> {
             manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
-            cambiodeescena.changeScene(this, paneldestino);
         });
         add(volverButton);
         add(botonIrAPagar);
