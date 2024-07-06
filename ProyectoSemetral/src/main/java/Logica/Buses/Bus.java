@@ -1,19 +1,18 @@
 package Logica.Buses;
 
-import Logica.TipoBus;
-
+/**es la clase q se instancia y se va decorando*/
 public class Bus extends ModeloBus {
-    public Bus(TipoBus bustipo){
-        super(bustipo);
-    }
-    
-    @Override
-    public int getPrecio(){
-        return precio;
+    public Bus(){
+        super();
     }
 
+    /**
+     * hace override al metodo toString, pero no cambia la info, ya q esta cambia solo
+     * en las decoraciones
+     * @return
+     */
     @Override
-    public String getDescription(){
-        return "Precio: " + getPrecio();
+    public String toString(){
+        return "";
     }
 }
