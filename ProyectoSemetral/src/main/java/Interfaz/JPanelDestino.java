@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Logica.Buses.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,10 @@ public class JPanelDestino extends JPanel {
     private String horaSalidaSeleccionada = "";
     private String fechaSeleccionada = "";
     private JButton verAsientos;
+    private ModeloBus busbase;
+    private String fecha1;
+    private String fecha2;
+    private String fecha3;
 
     public JPanelDestino(Cambiodeescena cambiodeescena, JPanelComprar panelComprar, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
         // Inicialización de instancias
@@ -30,6 +35,8 @@ public class JPanelDestino extends JPanel {
         this.setBackground(Color.YELLOW);
         setLayout(null); // Layout absoluto para posicionar componentes manualmente
 
+        //se crea el bus
+        busbase = new Bus();
         //labels
         add(labels.botonlabel("Seleccionar destino", 250, 30, 300, 50, 25));
         add(labels.botonlabel("Destinos", 20, 100, 300, 50, 25));
@@ -38,17 +45,17 @@ public class JPanelDestino extends JPanel {
         add(labels.botonlabel("Fechas", 620, 100, 300, 50, 25));
 
         // Botones complejos para destinos, tipos de viaje, hora y fecha
-        add(crear.botoncomplejocrear("Destino 1", 20, 150, 150, 50, e -> { destinoSeleccionado = "Destino 1"; actualizarEstadoBotonVerAsiento(); }));
-        add(crear.botoncomplejocrear("Destino 2", 20, 250, 150, 50, e -> { destinoSeleccionado = "Destino 2"; actualizarEstadoBotonVerAsiento(); }));
-        add(crear.botoncomplejocrear("Destino 3", 20, 350, 150, 50, e -> { destinoSeleccionado = "Destino 3"; actualizarEstadoBotonVerAsiento(); }));
+        add(crear.botoncomplejocrear("Santiago", 20, 150, 150, 50, e -> { destinoSeleccionado = "Santiago"; actualizarEstadoBotonVerAsiento(); }));//aqui hay q cambiar la wea, para q se añadan las cosas, tengo q crear un metodo q esto me guarde un selector, y me modifi el selector segun el boton, y al apretar el ver asientosse añadan los decoradores al bus
+        add(crear.botoncomplejocrear("Talca", 20, 250, 150, 50, e -> { destinoSeleccionado = "Talca"; actualizarEstadoBotonVerAsiento(); }));
+        add(crear.botoncomplejocrear("Chillan", 20, 350, 150, 50, e -> { destinoSeleccionado = "Chillan"; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear("Ida y vuelta", 220, 200, 150, 50, e -> { tipoViajeSeleccionado = "Ida y vuelta"; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear("Ida", 220, 300, 150, 50, e -> { tipoViajeSeleccionado = "Ida"; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear("07:00 AM", 420, 150, 150, 50, e -> { horaSalidaSeleccionada = "07:00 AM"; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear("12:00 PM", 420, 250, 150, 50, e -> { horaSalidaSeleccionada = "12:00 PM"; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear("17:00 PM", 420, 350, 150, 50, e -> { horaSalidaSeleccionada = "17:00 PM"; actualizarEstadoBotonVerAsiento(); }));
-        String fecha1 = ObtenerFecha.getDateFormatted(0); // Fecha de hoy
-        String fecha2 = ObtenerFecha.getDateFormatted(1); // Fecha de mañana
-        String fecha3 = ObtenerFecha.getDateFormatted(2); // Fecha de pasado mañana
+        fecha1 = ObtenerFecha.getDateFormatted(0); // Fecha de hoy
+        fecha2 = ObtenerFecha.getDateFormatted(1); // Fecha de mañana
+        fecha3 = ObtenerFecha.getDateFormatted(2); // Fecha de pasado mañana
         add(crear.botoncomplejocrear(fecha1, 620, 150, 150, 50, e -> { fechaSeleccionada = fecha1; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear(fecha2, 620, 250, 150, 50, e -> { fechaSeleccionada = fecha2; actualizarEstadoBotonVerAsiento(); }));
         add(crear.botoncomplejocrear(fecha3, 620, 350, 150, 50, e -> { fechaSeleccionada = fecha3; actualizarEstadoBotonVerAsiento(); }));
@@ -72,8 +79,38 @@ public class JPanelDestino extends JPanel {
         verAsientos.setEnabled(!destinoSeleccionado.isEmpty() && !tipoViajeSeleccionado.isEmpty() && !horaSalidaSeleccionada.isEmpty() && !fechaSeleccionada.isEmpty());
     }
 
+    private void busdecorator(){
+        if(destinoSeleccionado == "Santiago"){
+            busbase = new BusDestinoSntg(busbase);
+        }
+        else if(destinoSeleccionado == "Talca"){
+            busbase = new BusDestinoTalca(busbase);
+        }
+        else if(destinoSeleccionado == "Chillan"){
+            busbase = new BusDestinoChillan(busbase);
+        }
+        if(horaSalidaSeleccionada == "07:00 AM"){
+            busbase = new BusHoraSalida07AM(busbase);
+        }
+        else if(horaSalidaSeleccionada == "12:00 PM"){
+            busbase = new BusHoraSalida12PM(busbase);
+        }
+        else if(horaSalidaSeleccionada == "17:00 PM"){
+            busbase = new BusHoraSalida17PM(busbase);
+        }
+        if(fechaSeleccionada == fecha1){
+            busbase = new BusFecha1(busbase, fecha1);
+        }
+        else if(fechaSeleccionada == fecha2){
+            busbase = new BusFecha1(busbase, fecha2);
+        }
+        else if(fechaSeleccionada ==fecha3){
+            busbase = new BusFecha1(busbase, fecha3);
+        }
+    }
     private void guardarSeleccion(ActionEvent e) {
         crear.guardarseleccion(destinoSeleccionado, tipoViajeSeleccionado, horaSalidaSeleccionada, fechaSeleccionada);
+        busdecorator();
     }
 
     private void deseleccionar() {

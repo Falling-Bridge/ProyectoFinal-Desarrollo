@@ -1,0 +1,25 @@
+package Logica.Buses;
+
+public class BusHoraSalida07AM extends BusDecorador{
+    
+    public BusHoraSalida07AM(ModeloBus busforma){
+        super(busforma);
+    }
+
+    /**
+     * hace override del metodo getPrecio, esta vez modificandolo
+     * @return el precio ya establecido mas 2000 pesos
+     */
+    @Override
+    public int getPrecio(){
+        return buslaillier.getPrecio() + 2000;
+    }
+
+    /**
+     * hace override y cambia la definición del bus sale a las 7 AM
+     */
+    @Override
+    public String toString(){
+        return " Hora Salida: 07:00 AM; " + buslaillier.toString();
+    }
+}
