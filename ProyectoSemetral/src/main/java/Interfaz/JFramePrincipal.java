@@ -1,6 +1,11 @@
 package Interfaz;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.*;
+import java.awt.event.*;
 
 public class JFramePrincipal extends JFrame {
 
@@ -21,5 +26,16 @@ public class JFramePrincipal extends JFrame {
 
         // Inicialmente mostrar el panelMenú
         cambio.changeScene(null, panelMenu);
+
+        addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("tickets.txt"))) {
+                    writer.write("");
+                } catch (IOException t) {
+                    t.printStackTrace();
+                }
+            }
+        });
     }
 }
