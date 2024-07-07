@@ -1,6 +1,13 @@
 package Logica.Buses;
 
 import java.util.ArrayList;
+
+import Logica.Asientos.Asiento;
+import Logica.Asientos.AsientoCama;
+import Logica.Asientos.AsientoPasillo;
+import Logica.Asientos.AsientoSemiCama;
+import Logica.Asientos.AsientoVIP;
+import Logica.Asientos.AsientoVentana;
 import Logica.Asientos.ModeloAsiento;
 import java.util.Random;
 
@@ -13,12 +20,141 @@ public abstract class ModeloBus {
     protected ArrayList<ModeloAsiento> AsientosPiso1;
     protected ArrayList<ModeloAsiento> AsientosPiso2;
 
-    public ModeloBus(){
+    public ModeloBus() throws Exception{
         /**
          * se inicializan los arreglos q se llenan al momento de crear un bus de 1 o 2 pisos
          */
         AsientosPiso1 = new ArrayList<ModeloAsiento>();
         AsientosPiso2 = new ArrayList<ModeloAsiento>();
+
+         /**
+         * el bus tiene 30 asientos y se llena con distinto tipos
+         * va verificando segun su pocición si va a ser ventana o pasillo,
+         * y lo añade con esa decoración
+          * el llenado random se basa en usar el metodo llenado_de_asientos
+         */
+        for (int i = 1; i <= 40; i++) {
+            if (i <= 5 || (16 <= i && i <= 20) ) {
+                if (i % 3 == 0) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoVIP(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                    
+                }
+                else if (i % 3 == 1) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoSemiCama(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                } 
+                else {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoCama(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()){
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                }
+            } 
+            else if ((i >= 6 && i <= 15)) {
+                if (i % 3 == 0) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoVIP(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                    
+                }
+                else if (i % 3 == 1) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoSemiCama(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                } 
+                else {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoCama(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()){
+                        silla.comprar();
+                    }
+                    AsientosPiso1.add(silla);
+                }
+            }
+            else if ((i >= 21 && i <= 25)|| (36 <= i) ) {
+                if (i % 3 == 0) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoVIP(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                    
+                }
+                else if (i % 3 == 1) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoSemiCama(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                } 
+                else {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoCama(silla);
+                    silla = new AsientoVentana(silla);
+                    if(llenado_de_asientos()){
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                }
+            } 
+            else if ((i >= 26 && i <= 35)) {
+                if (i % 3 == 0) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoVIP(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                    
+                }
+                else if (i % 3 == 1) {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoSemiCama(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()) {
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                } 
+                else {
+                    ModeloAsiento silla = new Asiento(i);
+                    silla = new AsientoCama(silla);
+                    silla = new AsientoPasillo(silla);
+                    if(llenado_de_asientos()){
+                        silla.comprar();
+                    }
+                    AsientosPiso2.add(silla);
+                }
+            }
+        }
     }
 
     /**
@@ -30,8 +166,16 @@ public abstract class ModeloBus {
     public boolean llenado_de_asientos(){
         Random random = new Random();
         int randomizador = random.nextInt(2);
-        System.out.println(randomizador);
         return (randomizador == 0);
+    }
+
+    public boolean getestadoAsiento(int index, int piso){
+        if(piso == 0){
+            return AsientosPiso1.get(index).getComprado();
+        } 
+        else{
+            return AsientosPiso2.get(index).getComprado();
+        }
     }
 
     /**

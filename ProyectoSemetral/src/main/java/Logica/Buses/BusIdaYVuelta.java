@@ -5,7 +5,7 @@ package Logica.Buses;
  */
 public class BusIdaYVuelta extends BusDecorador {
 
-    public BusIdaYVuelta(ModeloBus busforma){
+    public BusIdaYVuelta(ModeloBus busforma) throws Exception{
         super(busforma);
     }
 

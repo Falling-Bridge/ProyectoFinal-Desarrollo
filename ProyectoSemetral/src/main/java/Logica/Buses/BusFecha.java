@@ -8,7 +8,7 @@ public class BusFecha extends BusDecorador{
     
     private String fechaselect;
     private int precioextra;
-    public BusFecha(ModeloBus busforma, String fecha, int precio){
+    public BusFecha(ModeloBus busforma, String fecha, int precio) throws Exception{
         super(busforma);
         fechaselect = fecha;
         precioextra = precio;

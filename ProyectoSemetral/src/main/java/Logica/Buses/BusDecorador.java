@@ -6,7 +6,7 @@ package Logica.Buses;
  */
 public abstract class BusDecorador extends ModeloBus {
     protected ModeloBus buslaillier;
-    public BusDecorador(ModeloBus busforma){
+    public BusDecorador(ModeloBus busforma) throws Exception{
         super();
         this.buslaillier = busforma;
     }

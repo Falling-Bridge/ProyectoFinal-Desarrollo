@@ -2,7 +2,7 @@ package Logica.Buses;
 
 /**es la clase q se instancia y se va decorando*/
 public class Bus extends ModeloBus {
-    public Bus(){
+    public Bus() throws Exception{
         super();
     }
 
