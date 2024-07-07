@@ -99,13 +99,13 @@ public class JPanelDestino extends JPanel {
             busbase = new BusHoraSalida17PM(busbase);
         }
         if(fechaSeleccionada == fecha1){
-            busbase = new BusFecha1(busbase, fecha1);
+            busbase = new BusFecha(busbase, fecha1, 1500);
         }
         else if(fechaSeleccionada == fecha2){
-            busbase = new BusFecha1(busbase, fecha2);
+            busbase = new BusFecha(busbase, fecha2, 1000);
         }
         else if(fechaSeleccionada ==fecha3){
-            busbase = new BusFecha1(busbase, fecha3);
+            busbase = new BusFecha(busbase, fecha3, 500);
         }
     }
     private void guardarSeleccion(ActionEvent e) {

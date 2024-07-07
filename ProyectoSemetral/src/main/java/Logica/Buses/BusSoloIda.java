@@ -1,11 +1,11 @@
 package Logica.Buses;
 
 /**
- * es el segundo decorador segun el horariode salida del bus, donde se define que el bus sale a las 12 PM
+ * es el primer decorador segun el tipo de pasaje, donde se define que el pasaje es de solo ida
  */
-public class BusHoraSalida12PM extends BusDecorador{
-    
-    public BusHoraSalida12PM(ModeloBus busforma){
+public class BusSoloIda extends BusDecorador {
+
+    public BusSoloIda(ModeloBus busforma){
         super(busforma);
     }
 
@@ -19,10 +19,10 @@ public class BusHoraSalida12PM extends BusDecorador{
     }
 
     /**
-     * hace override y cambia la definición del bus sale a las 12 PM
+     * hace override y cambia la definición del bus, señalando que el pasaje es solo de ida
      */
     @Override
     public String toString(){
-        return "Hora Salida: 12:00 PM;\n" + buslaillier.toString();
+        return "Pasaje de solo ida;\n"  + buslaillier.toString();
     }
 }

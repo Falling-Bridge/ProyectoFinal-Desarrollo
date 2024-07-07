@@ -1,5 +1,8 @@
 package Logica.Buses;
 
+/**
+ * es el primer decorador segun el horariode salida del bus, donde se define que el bus sale a las 7 AM
+ */
 public class BusHoraSalida07AM extends BusDecorador{
     
     public BusHoraSalida07AM(ModeloBus busforma){
@@ -20,6 +23,6 @@ public class BusHoraSalida07AM extends BusDecorador{
      */
     @Override
     public String toString(){
-        return " Hora Salida: 07:00 AM; " + buslaillier.toString();
+        return "Hora Salida: 07:00 AM;\n" + buslaillier.toString();
     }
 }

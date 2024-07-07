@@ -1,7 +1,7 @@
 package Logica.Buses;
 
 /**
- * es el primer segundo segun el destino del bus, donde se define que el bus se dirige a Chillan
+ * es el primer decorador segun el destino del bus, donde se define que el bus se dirige a Chillan
  */
 public class BusDestinoChillan extends BusDecorador {
 
@@ -19,10 +19,10 @@ public class BusDestinoChillan extends BusDecorador {
     }
 
     /**
-     * hace override y cambia la definición del busva camino a santiago
+     * hace override y cambia la definición del bus va camino a chillan
      */
     @Override
     public String toString(){
-        return " Destino: Chillan; " + buslaillier.toString();
+        return "Destino: Chillan;\n" + buslaillier.toString();
     }
 }

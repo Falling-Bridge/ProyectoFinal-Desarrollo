@@ -1,7 +1,7 @@
 package Logica.Buses;
 
 /**
- * es el tercerr decorador segun la marca del bus, donde se define el bus como bus marca LAS GALAXIAS,
+ * es el tercer decorador segun la marca del bus, donde se define el bus como bus marca LAS GALAXIAS,
  */
 public class BusLasGalaxias extends BusDecorador{
 
@@ -25,7 +25,7 @@ public class BusLasGalaxias extends BusDecorador{
      */
     @Override
     public String toString(){
-        return "Marca: Las Galaxias; " + buslaillier.toString();
+        return "Marca: Las Galaxias;\n" + buslaillier.toString();
     }
 
 }

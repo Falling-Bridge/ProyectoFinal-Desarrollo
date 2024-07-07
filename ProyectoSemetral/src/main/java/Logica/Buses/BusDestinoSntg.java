@@ -19,10 +19,10 @@ public class BusDestinoSntg extends BusDecorador {
     }
 
     /**
-     * hace override y cambia la definición del busva camino a santiago
+     * hace override y cambia la definición del bus va camino a santiago
      */
     @Override
     public String toString(){
-        return " Destino: Santiago; " + buslaillier.toString();
+        return "Destino: Santiago;\n" + buslaillier.toString();
     }
 }

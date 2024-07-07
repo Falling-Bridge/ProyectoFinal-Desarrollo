@@ -23,6 +23,6 @@ public class BusTurbus extends BusDecorador {
      */
     @Override
     public String toString(){
-        return "Marca: TurBus; " + buslaillier.toString();
+        return "Marca: TurBus;\n" + buslaillier.toString();
     }
 }
