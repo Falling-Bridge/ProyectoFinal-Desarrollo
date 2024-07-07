@@ -15,6 +15,7 @@ public class JPanelMisPasajes extends JPanel {
     private CrearBoton crear;
     private CrearLabels crearLabels;
     private JTextArea textArea;
+    private ManejoArchivo manejoArchivo;
 
     public JPanelMisPasajes(Cambiodeescena cambiodeescena, JPanelMenú panelMenu) {
 
@@ -22,6 +23,7 @@ public class JPanelMisPasajes extends JPanel {
         this.cambiodeescena = cambiodeescena;
         this.panelMenu = panelMenu;
         this.crear = new CrearBoton(cambiodeescena);
+        manejoArchivo = new ManejoArchivo();
         this.crearLabels = new CrearLabels();
         this.setBackground(Color.RED);
         setLayout(null);
@@ -34,8 +36,13 @@ public class JPanelMisPasajes extends JPanel {
         add(scrollPane);
 
         // Botón para volver al menú principal
-        add(crearLabels.botonlabel("Hola", 500, 40, 100, 100, 30));
         add(crear.botonsimplecrear("Volver", 350, 500, 100, 50, this, panelMenu));
+        JButton terminaButton = crear.botoncomplejocrear("eliminar tickets", 100, 500, 150, 50, e -> {
+            manejoArchivo.eliminarContenidoArchivo("tickets.txt");
+            cargarContenidoTickets();
+        });
+        add(terminaButton);
+        
     }
 
     // Método para cargar el contenido del archivo tickets.txt

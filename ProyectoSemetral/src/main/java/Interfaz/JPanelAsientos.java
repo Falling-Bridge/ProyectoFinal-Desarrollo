@@ -21,8 +21,10 @@ public class JPanelAsientos extends JPanel {
     private JTextArea areaResumen; // JTextArea para mostrar el resumen de selección
     private JScrollPane scrollResumen;
     private JButton botonIrAPagar;
+    private JButton botonvolver;
 
-    public JPanelAsientos(Cambiodeescena cambiodeescena, JPanelDestino paneldestino, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
+    public JPanelAsientos(Cambiodeescena cambiodeescena, JPanelDestino paneldestino, JPanelMenú panelMenú,
+            JPanelMisPasajes misPasajes) {
         this.cambiodeescena = cambiodeescena;
         this.paneldestino = paneldestino;
         panelPagar = new JPanelPagar(cambiodeescena, this, panelMenú, misPasajes);
@@ -39,25 +41,26 @@ public class JPanelAsientos extends JPanel {
         scrollResumen.setBounds(560, 100, 250, 200);
         scrollResumen.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         add(scrollResumen);
-        
+
         asientosSeleccionados = new boolean[40];
 
         crearBotonPiso("Piso 1", true, 50);
         crearBotonPiso("Piso 2", false, 200);
-        add(crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino));
         botonIrAPagar = crear.botonsimplecrear("Ir a pagar", 500, 450, 150, 50, this, panelPagar);
         botonIrAPagar.setEnabled(false);
         botonIrAPagar.addActionListener(this::guardarSeleccion);
+        actualizarEstadoBotonPagar();
         add(botonIrAPagar);
-
         actualizarPanel();
-        
-        // Agregar ActionListener al botón 'Volver'
-        JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
-        volverButton.addActionListener(e -> {
-            manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
+        botonvolver = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
+        botonvolver.addActionListener(e -> {
+            manejoArchivo.eliminarLineasPosterioresYCantidad(4, "Las Galaxias", "Sololda", "Eme Bus");  // Ajusta el
+                                                                                                                                // número de
+                                                                                                                                // líneas a
+                                                                                                                                // eliminar según
+                                                                                                                                // tu necesidad
         });
-        add(volverButton);
+        add(botonvolver);
     }
 
     private void crearBotonPiso(String texto, boolean selected, int x) {
@@ -73,15 +76,19 @@ public class JPanelAsientos extends JPanel {
 
     private void actualizarPanel() {
         removeAll();
-
         crearBotonPiso("Piso 1", piso1, 50);
         crearBotonPiso("Piso 2", !piso1, 200);
-        JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
-        volverButton.addActionListener(e -> {
-            manejoArchivo.eliminarLineasPosterioresYCantidad("Compañia", 4); // Ajusta el número de líneas a eliminar según tu necesidad
+        JButton botonvolver = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, paneldestino);
+        botonvolver.addActionListener(e -> {
+            manejoArchivo.eliminarLineasPosterioresYCantidad(4, "Las Galaxias", "Sololda", "Eme Bus"); // Ajusta el
+                                                                                                                                // número de
+                                                                                                                                // líneas a
+                                                                                                                                // eliminar según
+                                                                                                                                // tu necesidad
         });
-        add(volverButton);
+        add(botonvolver);
         add(botonIrAPagar);
+        actualizarEstadoBotonPagar();
         crearAsientos(piso1 ? asientosPiso1 : asientosPiso2, piso1 ? 0 : 20, piso1 ? 20 : 40);
         ResumenSelección();
         add(scrollResumen);
@@ -113,8 +120,11 @@ public class JPanelAsientos extends JPanel {
                     asientosSeleccionados[asientoIndex] = !asientosSeleccionados[asientoIndex]; // Cambiar el estado del
                                                                                                 // asiento seleccionado
                     JButton boton = (JButton) e.getSource();
-                    boton.setBackground(asientosSeleccionados[asientoIndex] ? Color.GREEN : Color.RED); // Cambiar el color del botón según
-                                                                                                        // el estado seleccionado
+                    boton.setBackground(asientosSeleccionados[asientoIndex] ? Color.GREEN : Color.RED); // Cambiar el
+                                                                                                        // color del
+                                                                                                        // botón según
+                                                                                                        // el estado
+                                                                                                        // seleccionado
                     // Actualizar el resumen de selección
                     ResumenSelección();
                     actualizarEstadoBotonPagar();
@@ -153,7 +163,6 @@ public class JPanelAsientos extends JPanel {
     }
 
     private String determinarTipoAsiento(int index) {
-        // Ejemplo de lógica para determinar el tipo de asiento basado en el índice
         if (index % 3 == 0) {
             return "Saloncama";
         } else if (index % 3 == 1) {
@@ -190,23 +199,23 @@ public class JPanelAsientos extends JPanel {
         sb.append("Resumen de Selección:\n");
         sb.append(asientosDetalle.toString());
         sb.append("Total de Asientos Ocupados: ").append(contarAsientosSeleccionados()).append("\n");
-        if (saloncama != 0){
+        if (saloncama != 0) {
             sb.append("Saloncama: ").append(saloncama).append("\n");
-        } if (semicama != 0){
+        } if (semicama != 0) {
             sb.append("Semicama: ").append(semicama).append("\n");
-        } if (normal != 0){
+        } if (normal != 0) {
             sb.append("Normal: ").append(normal).append("\n");
-        }
+        } 
         sb.append("Precio: ").append(saloncama * 100 + semicama * 200 + normal * 300);
-
         areaResumen.setText(sb.toString());
-
         return sb.toString(); // Devuelve el resumen como String
     }
 
     private void guardarSeleccion(ActionEvent e) {
         if (botonIrAPagar.isEnabled()) {
             crear.guardarseleccion(ResumenSelección());
+            deseleccionarTodosAsientos();
+            botonIrAPagar.setEnabled(false);
         }
     }
     
@@ -214,17 +223,21 @@ public class JPanelAsientos extends JPanel {
         for (int i = 0; i < asientosSeleccionados.length; i++) {
             asientosSeleccionados[i] = false;
             // Actualizar visualmente el color de los botones de asientos
-            if (piso1) {
+            if (piso1 && i < asientosPiso1.length) {
                 asientosPiso1[i].setBackground(Color.RED);
-            } else {
+            } else if (!piso1 && i - 20 < asientosPiso2.length) {
                 asientosPiso2[i - 20].setBackground(Color.RED);
             }
         }
         // Actualizar el resumen de selección
         ResumenSelección();
     }
-
+    
     private void actualizarEstadoBotonPagar() {
         botonIrAPagar.setEnabled(contarAsientosSeleccionados() > 0);
+    }    
+    
+    private void bloquearasiento(){
+        
     }
 }

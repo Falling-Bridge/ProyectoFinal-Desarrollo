@@ -17,8 +17,6 @@ public class JPanelPagar extends JPanel {
 
     public JPanelPagar(Cambiodeescena cambiodeescena, JPanelAsientos panelAsientos, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
         this.cambiodeescena = cambiodeescena;
-        this.panelAsientos = panelAsientos;
-        this.misPasajes = misPasajes;
         this.etapafinal = new JPaneletapafinal(cambiodeescena, this, panelMenú);
         setLayout(null);
         this.setBackground(Color.LIGHT_GRAY);
@@ -37,7 +35,7 @@ public class JPanelPagar extends JPanel {
         JButton terminaButton = crear.botonsimplecrear("terminar", 500, 450, 150, 50, this, etapafinal);
         terminaButton.addActionListener(e -> {
             manejoArchivo.copiarContenidoA();
-            manejoArchivo.eliminarContenidoArchivo();
+            manejoArchivo.eliminarContenidoArchivo("selecciones.txt");
         });
         add(terminaButton);
 

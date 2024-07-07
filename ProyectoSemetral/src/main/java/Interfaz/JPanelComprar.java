@@ -24,18 +24,18 @@ public class JPanelComprar extends JPanel {
 
         // Adición de botones
         add(labels.botonlabel("Seleccionar compañía", 250, 50, 300, 50, 25));
-        addButtonWithSave("Compañia A", 100, 360, 150, 50, misPasajes);
-        addButtonWithSave("Compañia B", 300, 360, 150, 50, misPasajes);
-        addButtonWithSave("Compañia C", 500, 360, 150, 50, misPasajes);
         add(crear.botonsimplecrear("Volver", 300, 500, 150, 50, this, panelMenu));
-    }
-
-    // Método para agregar botones de compra con guardado de selección y cambio de escena
-    private void addButtonWithSave(String nombre, int x, int y, int width, int height, JPanelMisPasajes misPasajes) {
-        JButton boton = crear.botoncomplejocrear(nombre, x, y, width, height, (ActionEvent e) -> {
-            crear.guardarseleccion(nombre);
+        add(crear.botoncomplejocrear("Eme Bus", 100, 360, 150, 50, (ActionEvent e) -> {
+            crear.guardarseleccion("Eme Bus");
             cambiodeescena.changeScene(this, paneldestino); // Cambiar al panel de destino después de seleccionar la compañía
-        });
-        add(boton);
+        }));
+        add(crear.botoncomplejocrear("Las Galaxias", 300, 360, 150, 50, (ActionEvent e) -> {
+            crear.guardarseleccion("Las Galaxias");
+            cambiodeescena.changeScene(this, paneldestino); // Cambiar al panel de destino después de seleccionar la compañía
+        }));
+        add(crear.botoncomplejocrear("Turbus", 500, 360, 150, 50, (ActionEvent e) -> {
+            crear.guardarseleccion("Turbus");
+            cambiodeescena.changeScene(this, paneldestino); // Cambiar al panel de destino después de seleccionar la compañía
+        }));
     }
 }

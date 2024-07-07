@@ -65,7 +65,7 @@ public class JPanelDestino extends JPanel {
 
         // Botón para volver al panel de 'compra'
         JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, panelComprar);
-        volverButton.addActionListener(e -> manejoArchivo.eliminarLineaConcreta("Compañia")); // Eliminar la línea que contiene "Compañia"
+        volverButton.addActionListener(e -> manejoArchivo.eliminarLineaConcreta("Las Galaxias","Sololda","Eme Bus")); // Eliminar la línea que contiene el nombre de la compañía
         add(volverButton);
 
         // Botón para ver los asientos (inicialmente deshabilitado hasta seleccionar un destino, tipo de viaje, hora)
@@ -108,11 +108,13 @@ public class JPanelDestino extends JPanel {
             busbase = new BusFecha(busbase, fecha3, 500);
         }
     }
+
     private void guardarSeleccion(ActionEvent e) {
         crear.guardarseleccion(destinoSeleccionado, tipoViajeSeleccionado, horaSalidaSeleccionada, fechaSeleccionada);
         busdecorator();
+        deseleccionar(); // Llamar al método deseleccionar después de guardar la selección
     }
-
+    
     private void deseleccionar() {
         destinoSeleccionado = "";
         tipoViajeSeleccionado = "";
