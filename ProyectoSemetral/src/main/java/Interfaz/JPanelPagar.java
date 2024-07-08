@@ -13,6 +13,7 @@ public class JPanelPagar extends JPanel {
     private JTextArea areaResumen;
     private JScrollPane scrollResumen;
     private CrearBoton crear;
+    private CrearLabels labels;
     private ManejoArchivo manejoArchivo;
 
     public JPanelPagar(Cambiodeescena cambiodeescena, JPanelAsientos panelAsientos, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
@@ -21,6 +22,7 @@ public class JPanelPagar extends JPanel {
         setLayout(null);
         this.setBackground(Color.LIGHT_GRAY);
         this.crear = new CrearBoton(cambiodeescena);
+        this.labels = new CrearLabels();
         this.manejoArchivo = new ManejoArchivo();
         areaResumen = new JTextArea();
         areaResumen.setEditable(false);
@@ -32,12 +34,14 @@ public class JPanelPagar extends JPanel {
         JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, panelAsientos);
         volverButton.addActionListener(e -> manejoArchivo.eliminarLineasDesdeHasta("Resumen de Selección:", "Precio"));
         add(volverButton);
-        JButton terminaButton = crear.botonsimplecrear("terminar", 500, 450, 150, 50, this, etapafinal);
+        JButton terminaButton = crear.botonsimplecrear("Comprar", 50, 450, 150, 50, this, etapafinal);
         terminaButton.addActionListener(e -> {
             manejoArchivo.copiarContenidoA();
             manejoArchivo.eliminarContenidoArchivo("selecciones.txt");
         });
         add(terminaButton);
+        add(labels.botonlabel("<html>Al presionar comprar<br>tu ticket quedará<br> registrado y podrás<br>verlo en 'Mis Pasajes'</html>",
+                                     460, 50, 300, 300, 24));
 
         // Llama al método para mostrar la selección al inicializar el panel
         mostrarSeleccion();

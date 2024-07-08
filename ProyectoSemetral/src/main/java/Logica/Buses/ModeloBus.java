@@ -170,13 +170,16 @@ public abstract class ModeloBus {
     }
 
     public boolean getestadoAsiento(int index, int piso){
-        if(piso == 0){
+        if(piso == 0 && index < AsientosPiso1.size()){
             return AsientosPiso1.get(index).getComprado();
-        } 
-        else{
+        } else if (piso == 20 && index < AsientosPiso2.size()) {
             return AsientosPiso2.get(index).getComprado();
+        } else {
+            // Manejar el caso fuera de los límites
+            return false;
         }
     }
+     
 
     /**
      * método con el cual se toma un numero de asiento y se marca como comprado, verificando de q piso es primero
@@ -184,15 +187,15 @@ public abstract class ModeloBus {
      * @return al asiento ya comprado
      */
     public ModeloAsiento ComprarAsiento(int numeroasiento) throws Exception{
-        if(numeroasiento > AsientosPiso1.size()){
-            AsientosPiso2.get(numeroasiento).comprar();/**se marca el boolean del asiento como true*/
-            return  AsientosPiso2.get(numeroasiento);
+        if(numeroasiento >= AsientosPiso1.size()){
+            AsientosPiso2.get(numeroasiento - AsientosPiso1.size()).comprar(); // Ajusta el índice
+            return  AsientosPiso2.get(numeroasiento - AsientosPiso1.size());
         }
         else{
             AsientosPiso1.get(numeroasiento).comprar();
             return AsientosPiso1.get(numeroasiento);
         }
-    }
+    }    
 
     /**
      * metodo para saber el precio

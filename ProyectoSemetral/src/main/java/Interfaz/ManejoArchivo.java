@@ -21,7 +21,7 @@ public class ManejoArchivo {
 
             // Leer todas las líneas del archivo de origen y almacenarlas en una lista
             while ((linea = reader.readLine()) != null) {
-                if (!linea.contains("Resumen")) {  // Ignorar líneas que contienen "Resumen"
+                if (!linea.contains("Resumen")) { // Ignorar líneas que contienen "Resumen"
                     lineas.add(linea);
                 }
             }
@@ -30,7 +30,8 @@ public class ManejoArchivo {
             // Verificar si el archivo nuevo tiene contenido
             boolean tieneContenido = archivoNuevo.exists() && archivoNuevo.length() > 0;
 
-            // Escribir las líneas en el archivo nuevo, agregando una línea de separación si tiene contenido
+            // Escribir las líneas en el archivo nuevo, agregando una línea de separación si
+            // tiene contenido
             PrintWriter writer = new PrintWriter(new FileWriter(archivoNuevo, true)); // true para modo append
             if (tieneContenido) {
                 writer.println("----------------------------");
@@ -193,27 +194,32 @@ public class ManejoArchivo {
         }
     }
 
-    public String[] compararPrimeras5Lineas(String archivo1, String archivo2) throws IOException {
-        // Leer las primeras 5 líneas de archivo1
-        String[] primerasLineasArchivo1 = leerPrimeras5Lineas(archivo1);
-        
-        // Leer las primeras 5 líneas de archivo2
-        String[] primerasLineasArchivo2 = leerPrimeras5Lineas(archivo2);
-        
+    public static String[] compararPrimeras5Lineas() throws IOException {
+        File archivoOrigen = new File("selecciones.txt");
+        File archivoNuevo = new File("tickets.txt");
+
+        if (!archivoOrigen.exists()) {
+            System.out.println("El archivo de origen no existe.");
+            return null; // Retorna null si el archivo de origen no existe
+        }
+
+        String[] primerasLineasArchivo1 = leerPrimeras5Lineas(archivoNuevo);
+        String[] primerasLineasArchivo2 = leerPrimeras5Lineas(archivoOrigen);
+
         // Comparar arrays de líneas
         for (int i = 0; i < 5; i++) {
             if (!primerasLineasArchivo1[i].equals(primerasLineasArchivo2[i])) {
-                return primerasLineasArchivo1; // Retornar las líneas del archivo1 si no son idénticas
+                return null; // Retorna null si las líneas no son idénticas
             }
         }
-        
-        return primerasLineasArchivo1; // Retornar null si son idénticas (no bloquear asientos)
-    }    
-    
+
+        return primerasLineasArchivo1; // Retorna las líneas si son idénticas
+    }
+
     // Método para leer las primeras 5 líneas de un archivo
-    private String[] leerPrimeras5Lineas(String archivo) throws IOException {
+    private static String[] leerPrimeras5Lineas(File archivo) throws IOException {
         String[] primerasLineas = new String[5];
-        
+
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             for (int i = 0; i < 5; i++) {
                 String linea = br.readLine();

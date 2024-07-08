@@ -2,6 +2,7 @@ package Interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class JPanelMenú extends JPanel {
 
@@ -11,7 +12,7 @@ public class JPanelMenú extends JPanel {
     private JPanelComprar comprar;
     private CrearBoton crear;
 
-    public JPanelMenú(Cambiodeescena cambiodeescena) {
+    public JPanelMenú(Cambiodeescena cambiodeescena) throws Exception {
 
         // inicialización de otras clases
         this.cambiodeescena = cambiodeescena;
