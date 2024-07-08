@@ -114,11 +114,24 @@ public class JPanelAsientos extends JPanel {
                 String tipoAsiento = determinarTipoAsiento(i);
                 asientos[index].setText(tipoAsiento); // Texto del botón como tipo de asiento
                 asientos[index].setBounds(x, y, 100, 30); // Tamaño y posición de cada botón de asiento
-                asientos[index].setBackground(asientosSeleccionados[i] ? Color.GREEN : Color.RED); // Color inicial del asiento basado en el estado seleccionado
-                asientos[index].setEnabled(!busbasea.getestadoAsiento(i, inicio)); // Desactivar botón si el asiento está ocupado
     
-                final int asientoIndex = i;
+                // Configurar color y habilitación según el estado del asiento
+                asientos[index].setBackground(asientosSeleccionados[i] ? Color.GREEN : Color.RED); // Color inicial del asiento basado en el estado seleccionado
+               // asientos[index].setEnabled(!busbasea.getestadoAsiento(i, inicio)); // Habilitar o deshabilitar según el estado del asiento
+    
+                // Si es piso 1 y está ocupado o es piso 2 y está ocupado, hacer el botón blanco y no clickeable
+                if (piso1 && busbasea.getestadoAsiento(i, inicio)) {
+                    asientos[index].setBackground(Color.WHITE); // Color blanco
+                    asientos[index].setEnabled(false); // No clickeable
+                }
+                else if(!piso1 && busbasea.getestadoAsiento(i - 20, inicio)){
+                    asientos[index].setBackground(Color.WHITE); // Color blanco
+                    asientos[index].setEnabled(false); // No clickeable
+                }
+    
+                // Agregar ActionListener solo si el botón está habilitado (para piso 1 o asientos no ocupados del piso 2)
                 if (asientos[index].isEnabled()) {
+                    final int asientoIndex = i;
                     asientos[index].addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -145,21 +158,8 @@ public class JPanelAsientos extends JPanel {
                 index++;
             }
         }
+    }   
     
-        // Actualizar el estado y color de los botones después de la creación
-        for (int i = inicio; i < fin && i < asientosSeleccionados.length; i++) {
-            int arrayIndex = i - inicio; // Índice dentro del arreglo de botones
-            asientos[arrayIndex].setBackground(busbasea.getestadoAsiento(i, inicio) ? Color.WHITE : Color.RED);
-            asientos[arrayIndex].setEnabled(!busbasea.getestadoAsiento(i, inicio));
-        }
-    
-        // Asignar los botones creados al arreglo correspondiente según el piso
-        if (piso1) {
-            asientosPiso1 = asientos;
-        } else {
-            asientosPiso2 = asientos;
-        }
-    }
     
     private int contarAsientosSeleccionados() {
         int seleccionados = 0;

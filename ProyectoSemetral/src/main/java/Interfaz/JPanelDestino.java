@@ -19,15 +19,16 @@ public class JPanelDestino extends JPanel {
     private String horaSalidaSeleccionada = "";
     private String fechaSeleccionada = "";
     private JButton verAsientos;
-    private ModeloBus busbase;
+    public ModeloBus busbase;
     private String fecha1;
     private String fecha2;
     private String fecha3;
 
-    public JPanelDestino(Cambiodeescena cambiodeescena, JPanelComprar panelComprar, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) {
+    public JPanelDestino(Cambiodeescena cambiodeescena, JPanelComprar panelComprar, JPanelMenú panelMenú, JPanelMisPasajes misPasajes) throws Exception {
         // Inicialización de instancias
         this.cambiodeescena = cambiodeescena;
         this.comprarpanel = panelComprar;
+        busbase = panelComprar.busbasec;
         panelasientos = new JPanelAsientos(cambiodeescena, this, panelMenú, misPasajes);
         crear = new CrearBoton(cambiodeescena);
         labels = new CrearLabels();
@@ -35,8 +36,6 @@ public class JPanelDestino extends JPanel {
         this.setBackground(Color.YELLOW);
         setLayout(null); // Layout absoluto para posicionar componentes manualmente
 
-        //se crea el bus
-        busbase = new Bus();
         //labels
         add(labels.botonlabel("Seleccionar destino", 250, 30, 300, 50, 25));
         add(labels.botonlabel("Destinos", 20, 100, 300, 50, 25));
@@ -79,7 +78,7 @@ public class JPanelDestino extends JPanel {
         verAsientos.setEnabled(!destinoSeleccionado.isEmpty() && !tipoViajeSeleccionado.isEmpty() && !horaSalidaSeleccionada.isEmpty() && !fechaSeleccionada.isEmpty());
     }
 
-    private void busdecorator(){
+    private void busdecorator() throws Exception {
         if(destinoSeleccionado == "Santiago"){
             busbase = new BusDestinoSntg(busbase);
         }
@@ -111,7 +110,6 @@ public class JPanelDestino extends JPanel {
 
     private void guardarSeleccion(ActionEvent e) {
         crear.guardarseleccion(destinoSeleccionado, tipoViajeSeleccionado, horaSalidaSeleccionada, fechaSeleccionada);
-        busdecorator();
         deseleccionar(); // Llamar al método deseleccionar después de guardar la selección
     }
     

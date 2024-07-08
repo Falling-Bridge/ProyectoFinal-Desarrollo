@@ -51,7 +51,7 @@ public class CrearBoton { // es el creador de botones por defecto, hay excepcion
             ex.printStackTrace(); // Manejo de excepciones, puedes personalizar esto según tus necesidades
         }
     }
-
+    
     // Método para crear botones de panelasiento (puedes eliminarlo si no se usa
     // actualmente)
     public JRadioButton crearRadioButton(String text, boolean selected, int x, int y, ActionListener actionListener) {
