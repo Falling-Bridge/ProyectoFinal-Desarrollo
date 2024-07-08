@@ -1,12 +1,14 @@
 package Interfaz;
 
+
+
 import javax.swing.*;
 
 public class JFramePrincipal extends JFrame {
 
     //aquí se configura el formato que siguen todos los demás paneles, por eso el nombre de jframe
 
-    public JFramePrincipal() {
+    public JFramePrincipal() throws Exception {
         // Configurar el JFrame
         setTitle("Programa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
