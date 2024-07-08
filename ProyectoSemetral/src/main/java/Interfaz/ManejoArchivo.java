@@ -133,17 +133,17 @@ public class ManejoArchivo {
      */
     public void eliminarLineasDesdeHasta(String desdeLinea, String hastaLinea) {
         File archivo = new File("selecciones.txt");
-
+    
         if (!archivo.exists()) {
             return; // Si el archivo no existe, no hay nada que eliminar
         }
-
+    
         try {
             List<String> lineas = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(archivo));
             String linea;
             boolean eliminar = false;
-
+    
             // Leer todas las líneas del archivo y almacenarlas en una lista
             while ((linea = reader.readLine()) != null) {
                 if (linea.contains(desdeLinea)) {
@@ -152,24 +152,25 @@ public class ManejoArchivo {
                 if (!eliminar) {
                     lineas.add(linea);
                 }
-                if (linea.contains(hastaLinea)) {
+                if (linea.contains(hastaLinea) && eliminar) {
                     eliminar = false;
+                    continue; // No agregar esta línea a la lista
                 }
             }
             reader.close();
-
+    
             // Escribir las líneas restantes de vuelta al archivo
             PrintWriter writer = new PrintWriter(new FileWriter(archivo));
             for (String line : lineas) {
                 writer.println(line);
             }
             writer.close();
-
+    
         } catch (IOException ex) {
             ex.printStackTrace(); // Manejo de excepciones, puedes personalizar esto según tus necesidades
         }
     }
-
+    
     /**
      * Método para eliminar líneas posteriores a una línea específica en un archivo,
      * hasta una cantidad determinada de líneas desde la línea de inicio.
