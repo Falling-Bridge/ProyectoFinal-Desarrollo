@@ -1,11 +1,12 @@
 package Interfaz;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-/**
- * Clase principal que configura el JFrame principal y que ocupan todas las clases jpanel
- */
 public class JFramePrincipal extends JFrame {
+
+    private ManejoArchivo manejoArchivo;
 
     /**
      * Configura el JFrame principal con título, tamaño y panel inicial.
@@ -13,6 +14,9 @@ public class JFramePrincipal extends JFrame {
      * @throws Exception Si ocurre algún error durante la configuración inicial.
      */
     public JFramePrincipal() throws Exception {
+        // Inicializar ManejoArchivo
+        manejoArchivo = new ManejoArchivo();
+
         // Configurar el JFrame
         setTitle("Programa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,5 +31,13 @@ public class JFramePrincipal extends JFrame {
 
         // Mostrar inicialmente el panelMenú
         cambio.changeScene(null, panelMenu);
+
+        // Agregar WindowListener para borrar el contenido del archivo al cerrar la ventana
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                manejoArchivo.eliminarContenidoArchivo("selecciones.txt");
+            }
+        });
     }
 }
