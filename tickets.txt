@@ -1,0 +1,11 @@
+Eme Bus
+Santiago
+Ida y vuelta
+07:00 AM
+08/07/2024
+Salón cama - Asiento 14
+Cantidad de asientos seleccionados: 0
+Total semi cama: 0
+Total salón cama: 1
+Total normal: 0
+Precio: $20000

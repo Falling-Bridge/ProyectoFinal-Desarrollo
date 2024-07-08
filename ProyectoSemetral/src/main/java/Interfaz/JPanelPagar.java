@@ -47,7 +47,7 @@ public class JPanelPagar extends JPanel {
 
         // Botón para volver atrás al menú de selección de asientos
         JButton volverButton = crear.botonsimplecrear("Volver", 300, 450, 150, 50, this, panelAsientos);
-        volverButton.addActionListener(e -> manejoArchivo.eliminarLineasDesdeHasta("Resumen de Selección:", "Precio"));
+        volverButton.addActionListener(e -> manejoArchivo.eliminarLineasDesdeHasta("Resumen", "Precio"));
         add(volverButton);
 
         // Botón para confirmar la compra y copiar la selección a 'tickets.txt'
