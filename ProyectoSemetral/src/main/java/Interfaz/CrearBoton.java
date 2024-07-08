@@ -6,16 +6,34 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.function.Consumer;
 
-public class CrearBoton { // es el creador de botones por defecto, hay excepciones que es cuando se requiere 'recordar'
-                          // una acción del mouse
+/**
+ * Clase para crear botones que se usan múltiples veces en la mayoría de los archivos
+ */
+public class CrearBoton {
 
     private Cambiodeescena cambiodeescena;
 
+    /**
+     * Constructor
+     *
+     * @param cambiodeescena Se usa para botones que requieren cambiar paneles
+     */
     public CrearBoton(Cambiodeescena cambiodeescena) {
         this.cambiodeescena = cambiodeescena;
     }
 
-    // Método para viajar entre paneles
+    /**
+     * Crea un botón simple con el propósito de cambiar entre paneles
+     *
+     * @param nombre       Texto que muestra el botón.
+     * @param x            Posición en x del botón.
+     * @param y            Posición en y del botón.
+     * @param width        Ancho del botón.
+     * @param height       Alto del botón.
+     * @param panelOrigen  Panel que se va a apagar
+     * @param panelDestino panel que se va a prender
+     * @return Boton que se usa para cambiar de escenas
+     */
     public JButton botonsimplecrear(String nombre, int x, int y, int width, int height, JPanel panelOrigen, JPanel panelDestino) {
         JButton boton = new JButton(nombre);
         boton.setBounds(x, y, width, height);
@@ -24,7 +42,18 @@ public class CrearBoton { // es el creador de botones por defecto, hay excepcion
         return boton;
     }
 
-    // Método para botones que necesiten recordar eventos
+    /**
+     * Crea un botón con nombre y acciones personalizadas mediante un Consumer para eventos complejos.
+     *
+     * 
+     * @param nombre       Texto que muestra el botón.
+     * @param x            Posición en x del botón.
+     * @param y            Posición en y del botón.
+     * @param width        Ancho del botón.
+     * @param height       Alto del botón.
+     * @param action       Acción que se realiza
+     * @return Boton que se usa para 'recordar' eventos
+     */
     public JButton botoncomplejocrear(String nombre, int x, int y, int width, int height, Consumer<ActionEvent> action) {
         JButton boton = new JButton(nombre);
         boton.setBounds(x, y, width, height);
@@ -33,7 +62,11 @@ public class CrearBoton { // es el creador de botones por defecto, hay excepcion
         return boton;
     }
 
-    // Método para guardar la selección en el archivo 'selecciones.txt'
+    /**
+     * Guarda las selecciones en el archivo 'selecciones.txt' en los archivo jpanel (compañia, destino, asientos, pagar).
+     *
+     * @param selecciones Selecciones a guardar en el archivo.
+     */
     public void guardarseleccion(String... selecciones) {
         File archivo = new File("selecciones.txt");
 
@@ -48,12 +81,20 @@ public class CrearBoton { // es el creador de botones por defecto, hay excepcion
             }
 
         } catch (IOException ex) {
-            ex.printStackTrace(); // Manejo de excepciones, puedes personalizar esto según tus necesidades
+            ex.printStackTrace();
         }
     }
-    
-    // Método para crear botones de panelasiento (puedes eliminarlo si no se usa
-    // actualmente)
+
+    /**
+     * Crea un JRadioButton con texto, estado seleccionado y acción personalizada.
+     *
+     * @param text           Texto que muestra el boton.
+     * @param selected       Estado inicial del radio button (true or false).
+     * @param x              Posición en x del botón.
+     * @param y              Posición en y del botón.
+     * @param actionListener Acción que se realiza al presiona el botón
+     * @return               Boton que se usa para crear pisos y que uno pueda estar activo a la vez
+     */
     public JRadioButton crearRadioButton(String text, boolean selected, int x, int y, ActionListener actionListener) {
         JRadioButton radioButton = new JRadioButton(text, selected);
         radioButton.setBounds(x, y, 100, 30);

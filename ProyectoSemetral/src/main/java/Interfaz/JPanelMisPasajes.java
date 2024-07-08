@@ -6,28 +6,34 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Clase que permite al usuario ver los pasajes adquiridos y eliminar todos los registros de pasajes almacenados en 'tickets.txt'.
+ */
 public class JPanelMisPasajes extends JPanel {
 
-    //instancias de otras clases
+    // Instancias de otras clases relacionadas
     private Cambiodeescena cambiodeescena;
     private JPanelMenú panelMenu;
-    private JPanelPagar panelPagar;
     private CrearBoton crear;
     private CrearLabels crearLabels;
     private JTextArea textArea;
     private ManejoArchivo manejoArchivo;
 
+    /**
+     * Constructor
+     * @param cambiodeescena Instancia de Cambiodeescena para gestionar el cambio de paneles.
+     * @param panelMenu Instancia de JPanelMenú para poder regresar al menú principal.
+     */
     public JPanelMisPasajes(Cambiodeescena cambiodeescena, JPanelMenú panelMenu) {
-
-        //incialización de las instancias
         this.cambiodeescena = cambiodeescena;
         this.panelMenu = panelMenu;
         this.crear = new CrearBoton(cambiodeescena);
         manejoArchivo = new ManejoArchivo();
         this.crearLabels = new CrearLabels();
         this.setBackground(Color.RED);
-        setLayout(null);
+        setLayout(null); // Layout absoluto para posicionar componentes manualmente
 
+        // Configuración del JTextArea para mostrar los tickets
         this.textArea = new JTextArea();
         textArea.setFont(new Font("Arial", Font.PLAIN, 14));
         textArea.setEditable(false); // Para que el usuario no pueda editar el texto
@@ -36,16 +42,20 @@ public class JPanelMisPasajes extends JPanel {
         add(scrollPane);
 
         // Botón para volver al menú principal
-        add(crear.botonsimplecrear("Volver", 350, 500, 100, 50, this, panelMenu));
-        JButton terminaButton = crear.botoncomplejocrear("eliminar tickets", 100, 500, 150, 50, e -> {
+        add(crear.botonsimplecrear("Volver", 300, 500, 150, 50, this, panelMenu));
+
+        // Botón para eliminar todos los tickets almacenados en 'tickets.txt'
+        JButton eliminarTicketsButton = crear.botoncomplejocrear("Eliminar tickets", 100, 500, 170, 50, e -> {
             manejoArchivo.eliminarContenidoArchivo("tickets.txt");
             cargarContenidoTickets();
         });
-        add(terminaButton);
-        
+        add(eliminarTicketsButton);
     }
 
-    // Método para cargar el contenido del archivo tickets.txt
+    /**
+     * Método privado para cargar el contenido del archivo 'tickets.txt' en el JTextArea.
+     * Lee cada línea del archivo y las muestra en el JTextArea.
+     */
     private void cargarContenidoTickets() {
         StringBuilder contenido = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader("tickets.txt"))) {
@@ -59,7 +69,12 @@ public class JPanelMisPasajes extends JPanel {
         textArea.setText(contenido.toString());
     }
 
-    // Sobrescribir el método setVisible para cargar el contenido actualizado del archivo
+    /**
+     * Sobrescribe el método setVisible para asegurar que al hacer visible el panel,
+     * se cargue el contenido actualizado del archivo 'tickets.txt' en el JTextArea.
+     *
+     * @param visible Booleano que indica si el panel debe ser visible o no.
+     */
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);

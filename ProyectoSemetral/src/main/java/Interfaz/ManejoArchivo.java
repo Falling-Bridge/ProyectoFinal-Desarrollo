@@ -3,8 +3,18 @@ package Interfaz;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Clase para manejar operaciones relacionadas con archivos.
+ * Permite copiar contenido de un archivo a otro, eliminar contenido de un archivo,
+ * y realizar operaciones específicas como eliminar líneas según criterios definidos.
+ */
 public class ManejoArchivo {
 
+    /**
+     * Método para copiar el contenido del archivo 'selecciones.txt' al archivo 'tickets.txt'.
+     * Se omite cualquier línea que contenga "Resumen".
+     * Si el archivo de origen no existe, muestra un mensaje de error.
+     */
     public void copiarContenidoA() {
         File archivoOrigen = new File("selecciones.txt");
         File archivoNuevo = new File("tickets.txt");
@@ -32,7 +42,7 @@ public class ManejoArchivo {
 
             // Escribir las líneas en el archivo nuevo, agregando una línea de separación si
             // tiene contenido
-            PrintWriter writer = new PrintWriter(new FileWriter(archivoNuevo, true)); // true para modo append
+            PrintWriter writer = new PrintWriter(new FileWriter(archivoNuevo, true));
             if (tieneContenido) {
                 writer.println("----------------------------");
             }
@@ -46,6 +56,11 @@ public class ManejoArchivo {
         }
     }
 
+    /**
+     * Método para eliminar todo el contenido de un archivo especificado por su nombre.
+     *
+     * @param nombre Nombre del archivo del cual se eliminará el contenido.
+     */
     public void eliminarContenidoArchivo(String nombre) {
         File archivo = new File(nombre);
 
@@ -54,7 +69,7 @@ public class ManejoArchivo {
         }
 
         try {
-            // Abrir el archivo para escribir sobre él (esto borrará su contenido)
+            // Abrir el archivo para borrar el contenido
             PrintWriter writer = new PrintWriter(new FileWriter(archivo, false));
             writer.close();
 
@@ -63,6 +78,12 @@ public class ManejoArchivo {
         }
     }
 
+    /**
+     * Método para eliminar líneas específicas de un archivo basado en el contenido.
+     * Elimina las líneas que contienen alguna de las compañías (Eme bus, Las galaxia y Turbus)
+     *
+     * @param compañías Arreglo de compañías cuyas líneas se eliminarán del archivo.
+     */
     public void eliminarLineaConcreta(String... compañías) {
         File archivo = new File("selecciones.txt");
 
@@ -103,6 +124,13 @@ public class ManejoArchivo {
         }
     }
 
+    /**
+     * Método para eliminar líneas desde una línea específica hasta otra línea específica
+     * en un archivo.
+     *
+     * @param desdeLinea Línea desde la cual comenzar a eliminar.
+     * @param hastaLinea Línea hasta la cual dejar de eliminar incluyendola
+     */
     public void eliminarLineasDesdeHasta(String desdeLinea, String hastaLinea) {
         File archivo = new File("selecciones.txt");
 
@@ -142,6 +170,13 @@ public class ManejoArchivo {
         }
     }
 
+    /**
+     * Método para eliminar líneas posteriores a una línea específica en un archivo,
+     * hasta una cantidad determinada de líneas desde la línea de inicio.
+     *
+     * @param cantidad   Cantidad de líneas a eliminar después de la línea de inicio.
+     * @param desdeLineas Líneas desde las cuales comenzar a eliminar.
+     */
     public void eliminarLineasPosterioresYCantidad(int cantidad, String... desdeLineas) {
         File archivo = new File("selecciones.txt");
 
@@ -192,44 +227,5 @@ public class ManejoArchivo {
         } catch (IOException ex) {
             ex.printStackTrace(); // Manejo de excepciones, puedes personalizar esto según tus necesidades
         }
-    }
-
-    public static String[] compararPrimeras5Lineas() throws IOException {
-        File archivoOrigen = new File("selecciones.txt");
-        File archivoNuevo = new File("tickets.txt");
-
-        if (!archivoOrigen.exists()) {
-            System.out.println("El archivo de origen no existe.");
-            return null; // Retorna null si el archivo de origen no existe
-        }
-
-        String[] primerasLineasArchivo1 = leerPrimeras5Lineas(archivoNuevo);
-        String[] primerasLineasArchivo2 = leerPrimeras5Lineas(archivoOrigen);
-
-        // Comparar arrays de líneas
-        for (int i = 0; i < 5; i++) {
-            if (!primerasLineasArchivo1[i].equals(primerasLineasArchivo2[i])) {
-                return null; // Retorna null si las líneas no son idénticas
-            }
-        }
-
-        return primerasLineasArchivo1; // Retorna las líneas si son idénticas
-    }
-
-    // Método para leer las primeras 5 líneas de un archivo
-    private static String[] leerPrimeras5Lineas(File archivo) throws IOException {
-        String[] primerasLineas = new String[5];
-
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            for (int i = 0; i < 5; i++) {
-                String linea = br.readLine();
-                if (linea != null) {
-                    primerasLineas[i] = linea.trim(); // Guardar la línea sin espacios al inicio y final
-                } else {
-                    primerasLineas[i] = ""; // Línea vacía si el archivo tiene menos de 5 líneas
-                }
-            }
-        }
-        return primerasLineas;
     }
 }

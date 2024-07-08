@@ -12,7 +12,6 @@ public class MainInterfaz {
                 try {
                     new JFramePrincipal().setVisible(true);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

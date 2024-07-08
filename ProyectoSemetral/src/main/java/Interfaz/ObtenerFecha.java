@@ -3,9 +3,17 @@ package Interfaz;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Clase para obtener la fecha actual y formatearla según el formato dd/MM/yyyy.
+ */
 public class ObtenerFecha {
 
-    // Método para obtener la fecha actual en el formato dd/MM/yyyy
+    /**
+     * Método para obtener la fecha y desplazar la misma
+     *
+     * @param daysOffset Número de días para desplazar la fecha actual.
+     * @return Fecha formateada en formato dd/MM/yyyy.
+     */
     public static String getDateFormatted(int daysOffset) {
         // Obtener la fecha actual
         LocalDate currentDate = LocalDate.now();
