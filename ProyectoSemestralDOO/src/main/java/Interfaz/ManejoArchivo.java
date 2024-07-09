@@ -1,7 +1,8 @@
 package Interfaz;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase para manejar operaciones relacionadas con archivos.
